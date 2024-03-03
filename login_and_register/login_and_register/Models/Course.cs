@@ -23,6 +23,8 @@ namespace login_and_register.Models
 
         public ICollection<Exam> Exams { get; set; } = new List<Exam>();
         public ICollection<Assignment> Assignments { get; set; } = new List<Assignment>();
+        public ICollection<Lecture> Lectures { get; set; } = new List<Lecture>();
+
 
 
 

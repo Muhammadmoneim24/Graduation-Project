@@ -19,8 +19,9 @@ namespace login_and_register.Configurations
             builder.Property(e => e.Tittle).HasColumnType("VARCHAR").HasMaxLength(255).IsRequired(false);
             builder.Property(e => e.Describtion).HasColumnType("VARCHAR").HasMaxLength(500).IsRequired(false);
             builder.Property(e => e.Instructions).HasColumnType("VARCHAR").HasMaxLength(500).IsRequired(false);
+            builder.Property(e => e.Time).HasColumnType("VARCHAR").HasMaxLength(100).IsRequired();
+            builder.Property(e => e.Grades).HasColumnType("INT").IsRequired();
             builder.Property(e => e.EndDate).HasColumnType("VARCHAR").HasMaxLength(255).IsRequired();
-
             builder.HasOne(x=>x.Course).WithMany(x=>x.Exams).HasForeignKey(x => x.CourseId);
             builder.HasMany(x => x.Questions).WithOne(e => e.Exam).HasForeignKey(e => e.ExamId);                                                                                
 

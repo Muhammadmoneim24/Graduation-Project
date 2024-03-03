@@ -16,7 +16,7 @@ namespace login_and_register.Controllers
             _authService = authService;
         }
 
-        [HttpPost("Register")]
+        [HttpPost]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid)
@@ -30,7 +30,7 @@ namespace login_and_register.Controllers
             return Ok(result);
         }
 
-        [HttpPost("Login")]
+        [HttpPost]
         public async Task<IActionResult> LoginAsync([FromBody] LoginModel model)
         {
             if (!ModelState.IsValid)

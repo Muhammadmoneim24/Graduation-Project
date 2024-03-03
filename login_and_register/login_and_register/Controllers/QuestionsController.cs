@@ -20,9 +20,9 @@ namespace login_and_register.Controllers
         [HttpPost("{id}")]
         public async Task<IActionResult> CreateQuestion(int id,[FromBody] QuestionsModel question)
         {
-            
 
-            if (question == null || !await _context.Exams.AllAsync(e=>e.Id==id))
+
+            if (question == null || !ModelState.IsValid)
                 return NotFound("Model is not found");
 
             var createdquestion = new Question
@@ -31,6 +31,7 @@ namespace login_and_register.Controllers
                 Text = question.Text,
                 Options = question.Options,
                 CorrectAnswer = question.CorrectAnswer,
+                Points = question.Points,
                 Explanation = question.Explanation
             };
 

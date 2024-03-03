@@ -21,8 +21,10 @@ namespace login_and_register.Configurations
             builder.Property(q => q.Options).HasColumnType("VARCHAR").HasMaxLength(1000).IsRequired();
             builder.Property(q => q.CorrectAnswer).HasColumnType("VARCHAR").HasMaxLength(255).IsRequired();
             builder.Property(q => q.Explanation).HasColumnType("VARCHAR").HasMaxLength(1000).IsRequired(false);
+            builder.Property(q => q.Points).HasColumnType("INT").IsRequired();
 
-            
+
+
 
             builder.ToTable("Questions");
 

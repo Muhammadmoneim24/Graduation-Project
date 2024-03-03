@@ -8,6 +8,8 @@ namespace login_and_register.Dtos
         public string? Options { get; set; }
 
         public string? CorrectAnswer { get; set; }
+        public int Points { get; set; }
+
         public string? Explanation { get; set; }
 
     }

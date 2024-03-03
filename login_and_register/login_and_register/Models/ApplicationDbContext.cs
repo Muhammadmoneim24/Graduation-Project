@@ -13,6 +13,7 @@ namespace login_and_register.Models
 
         public DbSet<Course> Courses { get; set; }
         public DbSet<UserCourse> UserCourses { get; set; }
+        public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Discussion> Discussions { get; set; }
         public DbSet<Exam> Exams { get; set; }
         public DbSet<Notification> Notifications { get; set; }

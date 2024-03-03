@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using login_and_register.Models;
 
@@ -11,9 +12,11 @@ using login_and_register.Models;
 namespace login_and_register.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240301184308_Uodatemigration")]
+    partial class Uodatemigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -436,37 +439,6 @@ namespace login_and_register.Migrations
                     b.ToTable("Exams", (string)null);
                 });
 
-            modelBuilder.Entity("login_and_register.Models.Lecture", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("VARCHAR");
-
-                    b.Property<string>("Link")
-                        .HasMaxLength(1000)
-                        .HasColumnType("VARCHAR");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("VARCHAR");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.ToTable("Lectures", (string)null);
-                });
-
             modelBuilder.Entity("login_and_register.Models.Notification", b =>
                 {
                     b.Property<int>("Id")
@@ -732,17 +704,6 @@ namespace login_and_register.Migrations
                     b.Navigation("Course");
                 });
 
-            modelBuilder.Entity("login_and_register.Models.Lecture", b =>
-                {
-                    b.HasOne("login_and_register.Models.Course", "Course")
-                        .WithMany("Lectures")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-                });
-
             modelBuilder.Entity("login_and_register.Models.Question", b =>
                 {
                     b.HasOne("login_and_register.Models.Exam", "Exam")
@@ -836,8 +797,6 @@ namespace login_and_register.Migrations
                         .IsRequired();
 
                     b.Navigation("Exams");
-
-                    b.Navigation("Lectures");
 
                     b.Navigation("UserCourses");
                 });

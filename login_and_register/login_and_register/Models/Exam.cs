@@ -19,6 +19,9 @@ namespace login_and_register.Models
         public string? Describtion { get; set; }
 
         public string Instructions { get; set; }
+        public string Time { get; set; }
+
+        public int Grades { get; set; }
         public DateTime EndDate { get; set; }
         public Course Course { get; set; }
 

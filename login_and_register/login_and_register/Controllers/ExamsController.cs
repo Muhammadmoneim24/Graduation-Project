@@ -30,6 +30,8 @@ namespace login_and_register.Controllers
                CourseId= id,
               Tittle = model.Tittle,
               Describtion = model.Describtion,
+              Grades = model.Grades,
+              Time = model.Time,
               Instructions = model.Instructions,
               EndDate = model.EndDate,
             };
