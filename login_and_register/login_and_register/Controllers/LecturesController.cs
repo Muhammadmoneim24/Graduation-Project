@@ -1,5 +1,6 @@
 ﻿using login_and_register.Dtos;
 using login_and_register.Models;
+using Humanizer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,27 +10,34 @@ namespace login_and_register.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class LecturesController : ControllerBase
-    {   
+    {
         private readonly ApplicationDbContext _context;
-
+        private  List<string> _allowedExtensions = new List<string> {".pdf",".doc",".png",".jpg" };
         public LecturesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         [HttpPost("{id}")]
-        public async Task<IActionResult> Createlecture(int id,[FromBody]LectureModel lecture) 
+        public async Task<IActionResult> Createlecture(int id, [FromForm] LectureModel lecture)
         {
+            if (!_allowedExtensions.Contains(Path.GetExtension(lecture.File.FileName).ToLower()))
+                return BadRequest("File extension is not allowed");
+
             if (lecture == null || !ModelState.IsValid)
                 return NotFound("Model is not found");
 
+            using var datastrem = new MemoryStream();
+            await lecture.File.CopyToAsync(datastrem);
+
             var lec = new Lecture
-            { 
-                Id = id,
+            {
+                CourseId = id,
                 Name = lecture.Name,
                 Description = lecture.Description,
                 Link = lecture.Link,
-            
+                LecFile = datastrem.ToArray(),
+
             };
 
             await _context.Lectures.AddAsync(lec);
@@ -38,10 +46,31 @@ namespace login_and_register.Controllers
             return Ok(lec);
         }
 
+        //[HttpPost("{id}")]
+        //public async Task<IActionResult> Createlecture(int id,[FromBody]LectureModel lecture) 
+        //{
+        //    if (lecture == null || !ModelState.IsValid)
+        //        return NotFound("Model is not found");
+
+        //    var lec = new Lecture
+        //    { 
+        //        CourseId = id,
+        //        Name = lecture.Name,
+        //        Description = lecture.Description,
+        //        Link = lecture.Link,
+
+        //    };
+
+        //    await _context.Lectures.AddAsync(lec);
+        //    _context.SaveChanges();
+
+        //    return Ok(lec);
+        //}
+
         [HttpGet("{id}")]
-        public async Task<IActionResult> Getlecture(int id) 
+        public async Task<IActionResult> Getlecture(int id)
         {
-            if(!await _context.Lectures.AnyAsync(x => x.Id == id))
+            if (!await _context.Lectures.AnyAsync(x => x.Id == id))
                 return BadRequest("Id is not valid");
 
             var lec = await _context.Lectures.FindAsync(id);
@@ -55,14 +84,26 @@ namespace login_and_register.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Updatelecture(int id, [FromBody] LectureModel lecture)
         {
-             var lec = await _context.Lectures.FindAsync(id);
+            var lec = await _context.Lectures.FindAsync(id);
 
             if (lecture == null || lec == null)
                 return NotFound("Model is not found");
 
+            if (lecture.File != null)
+            {
+                if (!_allowedExtensions.Contains(Path.GetExtension(lecture.File.FileName).ToLower()))
+                    return BadRequest("File extension is not allowed");
+
+               
+                using var dataStraem = new MemoryStream();
+
+                await lecture.File.CopyToAsync(dataStraem);
+
+                lec.LecFile = dataStraem.ToArray();
+            }
             lec.Name = lecture.Name;
             lec.Description = lecture.Description;
-            lec.Link = lecture.Link;     
+            lec.Link = lecture.Link;
 
             _context.SaveChanges();
 
@@ -76,7 +117,7 @@ namespace login_and_register.Controllers
                 return NotFound("id is not found");
 
             var lec = await _context.Lectures.FindAsync(id);
-            if ( lec == null)
+            if (lec == null)
                 return NotFound("Model is not found");
 
             _context.Lectures.Remove(lec);

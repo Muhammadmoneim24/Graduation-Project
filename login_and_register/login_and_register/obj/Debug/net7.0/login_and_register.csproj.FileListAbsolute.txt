@@ -518,9 +518,9 @@ E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\s
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\staticwebassets.build.json
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\staticwebassets.development.json
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\scopedcss\bundle\login_and_register.styles.css
-E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\login_and_register.csproj.CopyComplete
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\login_and_register.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\refint\login_and_register.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\login_and_register.pdb
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\login_and_register.genruntimeconfig.cache
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\ref\login_and_register.dll
+E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\login_an.68E75792.Up2Date

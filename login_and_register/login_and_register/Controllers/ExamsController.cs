@@ -51,9 +51,24 @@ namespace login_and_register.Controllers
 
             if (exam == null)
                 return NotFound("Exam is not found");
-
+           
             return Ok(exam);
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetExamQuestion(int id)
+        {
+            if (!await _context.Exams.AnyAsync(c => c.Id == id))
+                return BadRequest("Id is not valid");
+
+            var questions = await _context.Questions.Where(e => e.ExamId == id).ToListAsync();
+
+
+            if (questions == null)
+                return NotFound("question is not found");
+
+            return Ok(questions);
         }
 
         [HttpPut]

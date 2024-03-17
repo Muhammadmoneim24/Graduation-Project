@@ -451,6 +451,9 @@ namespace login_and_register.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("VARCHAR");
 
+                    b.Property<byte[]>("LecFile")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Link")
                         .HasMaxLength(1000)
                         .HasColumnType("VARCHAR");
