@@ -22,8 +22,8 @@ namespace login_and_register.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEnrollment(EnrollmentModel enrollment) 
         {
-            var course = await _context.Courses.FirstOrDefaultAsync(e => e.CourseName == enrollment.CourseName);
-            var std = await _context.Users.Where(e=>e.LastName == enrollment.StudentLastName).FirstOrDefaultAsync(e=>e.FirstName == enrollment.StudentFirstName);
+            var course = await _context.Courses.Where(e=>e.Id==enrollment.CourseId).FirstOrDefaultAsync(e => e.CourseName == enrollment.CourseName);
+            var std = await _context.Users.FirstOrDefaultAsync(e=>e.Email == enrollment.Email);
 
             if (course is null || std is null)
                 return BadRequest("User or course not found");
@@ -46,8 +46,8 @@ namespace login_and_register.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateEnrollment(int id,EnrollmentModel enrollment)
         {
-            var course = await _context.Courses.FirstOrDefaultAsync(e => e.CourseName == enrollment.CourseName);
-            var std = await _context.Users.Where(e => e.LastName == enrollment.StudentLastName).FirstOrDefaultAsync(e => e.FirstName == enrollment.StudentFirstName);
+            var course = await _context.Courses.Where(e => e.Id == enrollment.CourseId).FirstOrDefaultAsync(e => e.CourseName == enrollment.CourseName);
+            var std = await _context.Users.FirstOrDefaultAsync(e => e.Email == enrollment.Email);
 
             if (course is null || std is null)
                 return BadRequest("User or course not found");
@@ -78,8 +78,8 @@ namespace login_and_register.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteeEnrollment(int id, EnrollmentModel enrollment)
         {
-            var course = await _context.Courses.FirstOrDefaultAsync(e => e.CourseName == enrollment.CourseName);
-            var std = await _context.Users.Where(e => e.LastName == enrollment.StudentLastName).FirstOrDefaultAsync(e => e.FirstName == enrollment.StudentFirstName);
+            var course = await _context.Courses.Where(e => e.Id == enrollment.CourseId).FirstOrDefaultAsync(e => e.CourseName == enrollment.CourseName);
+            var std = await _context.Users.FirstOrDefaultAsync(e => e.Email == enrollment.Email);
 
             if (course is null || std is null)
                 return BadRequest("User or course not found");

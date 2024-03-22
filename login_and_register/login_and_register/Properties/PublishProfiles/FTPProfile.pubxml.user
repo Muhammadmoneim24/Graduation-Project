@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAzG4AWjWmUkq75se3wpJctQAAAAACAAAAAAAQZgAAAAEAACAAAADcezF0FeVBzVoDz5THgM305G9b3hHHtEvGPu3rT76FTAAAAAAOgAAAAAIAACAAAAC2YhnLqLtRyYD7TmJeMjAxWRxM4qNLCm27zKLxGMvcryAAAABA45I0k4BDEVLTWFeJIfGenl1EZ6M4+I/mHnNYNeJe9EAAAADxZ0BMsrpPBVTdQTRwjdrxuLFGGzEHqEzD2Qwl0TGsH5l15p/t2ver58L68AfK9tr/7CjtY+Y2IC78TVofsED7</EncryptedPassword>
+    <History>False|2024-03-20T13:59:49.1171492Z;</History>
+    <LastFailureDetails />
+    <_PublishTargetUrl>ftp://win5147.site4now.net</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>12/03/2023 16:04:03</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

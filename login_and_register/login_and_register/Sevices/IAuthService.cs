@@ -1,5 +1,4 @@
 ﻿using login_and_register.Dtos;
-using login_and_register.Models;
 
 namespace login_and_register.Sevices
 {

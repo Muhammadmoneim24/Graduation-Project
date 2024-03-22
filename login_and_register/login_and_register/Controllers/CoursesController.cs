@@ -28,8 +28,7 @@ namespace login_and_register.Controllers
             
                 CourseName = course.Name,
                 Description = course.Description,
-                StartDate = course.StartDate,
-                EndDate = course.EndDate
+                Link = course.Link,
             };
 
             await _context.Courses.AddAsync(newcourse);
@@ -64,8 +63,7 @@ namespace login_and_register.Controllers
 
             coursetoupdate.CourseName = course.Name;
             coursetoupdate.Description = course.Description;
-            coursetoupdate.StartDate = course.StartDate;
-            coursetoupdate.EndDate = course.EndDate;
+            coursetoupdate.Link = course.Link;
 
             _context.SaveChanges();
 

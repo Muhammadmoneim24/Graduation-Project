@@ -101,6 +101,80 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "login_and_register.Controllers.EnrollmentsController",
+    "Method": "AddEnrollment",
+    "RelativePath": "api/Enrollments",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "enrollment",
+        "Type": "login_and_register.Dtos.EnrollmentModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "login_and_register.Controllers.EnrollmentsController",
+    "Method": "UpdateEnrollment",
+    "RelativePath": "api/Enrollments",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "enrollment",
+        "Type": "login_and_register.Dtos.EnrollmentModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "login_and_register.Controllers.EnrollmentsController",
+    "Method": "GetEnrolls",
+    "RelativePath": "api/Enrollments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "login_and_register.Controllers.EnrollmentsController",
+    "Method": "DeleteeEnrollment",
+    "RelativePath": "api/Enrollments",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "enrollment",
+        "Type": "login_and_register.Dtos.EnrollmentModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "login_and_register.Controllers.ExamsController",
     "Method": "CreateExam",
     "RelativePath": "api/Exams/CreateExam/{id}",
@@ -222,6 +296,59 @@
         "Name": "File",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "login_and_register.Controllers.LecturesController",
+    "Method": "Getlecture",
+    "RelativePath": "api/Lectures/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "login_and_register.Controllers.LecturesController",
+    "Method": "Updatelecture",
+    "RelativePath": "api/Lectures/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "lecture",
+        "Type": "login_and_register.Dtos.LectureModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "login_and_register.Controllers.LecturesController",
+    "Method": "Deletelecture",
+    "RelativePath": "api/Lectures/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

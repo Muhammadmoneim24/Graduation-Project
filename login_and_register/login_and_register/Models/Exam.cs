@@ -14,12 +14,12 @@ namespace login_and_register.Models
         [ForeignKey("Course")]
         public int CourseId { get; set; }
         public int SubmissionId { get; set; }
-        public string Tittle { get; set; }
+        public string? Tittle { get; set; }
 
         public string? Describtion { get; set; }
 
-        public string Instructions { get; set; }
-        public string Time { get; set; }
+        public string? Instructions { get; set; }
+        public string? Time { get; set; }
 
         public int Grades { get; set; }
         public DateTime EndDate { get; set; }

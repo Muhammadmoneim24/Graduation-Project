@@ -306,22 +306,20 @@ namespace login_and_register.Migrations
 
                     b.Property<string>("CourseName")
                         .IsRequired()
-                        .HasMaxLength(255)
+                        .HasMaxLength(500)
                         .HasColumnType("VARCHAR");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
+                        .HasMaxLength(1000)
                         .HasColumnType("VARCHAR");
 
                     b.Property<int>("DiscussionId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Link")
+                        .HasMaxLength(1000)
+                        .HasColumnType("VARCHAR");
 
                     b.HasKey("Id");
 
