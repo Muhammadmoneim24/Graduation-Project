@@ -17,7 +17,7 @@ namespace login_and_register.Configurations
             builder.HasKey(d => d.Id);
             builder.Property(d =>d.Id).ValueGeneratedOnAdd();
 
-            builder.Property(d => d.Tittle).HasColumnType("VARCHAR").HasMaxLength(100).IsRequired(false);
+            builder.Property(d => d.Tittle).HasColumnType("VARCHAR").HasMaxLength(255).IsRequired(false);
             builder.Property(d => d.Content).HasColumnType("VARCHAR").HasMaxLength(1000).IsRequired(false);
 
             builder.HasOne(d => d.ApplicationUser).WithOne(c => c.Discussion).HasForeignKey<Discussion>(d => d.ApplicationUserId).IsRequired(false);

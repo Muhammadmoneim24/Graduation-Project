@@ -11,6 +11,8 @@ E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.JsonPatch.dll
+E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.OpenApi.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.Razor.Language.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
@@ -58,6 +60,7 @@ E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\Newtonsoft.Json.dll
+E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\Newtonsoft.Json.Bson.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\NuGet.Common.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\NuGet.Configuration.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\NuGet.DependencyResolver.Core.dll

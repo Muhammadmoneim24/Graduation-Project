@@ -12,7 +12,7 @@ namespace login_and_register.Controllers
     public class LecturesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private  List<string> _allowedExtensions = new List<string> {".pdf",".doc",".png",".jpg" };
+        private  List<string> _allowedExtensions = new List<string> {".pdf",".doc", ".docx", ".png",".jpg" };
         public LecturesController(ApplicationDbContext context)
         {
             _context = context;
@@ -39,6 +39,8 @@ namespace login_and_register.Controllers
                 LecFile = datastrem.ToArray(),
 
             };
+
+    
 
             await _context.Lectures.AddAsync(lec);
             _context.SaveChanges();
@@ -67,7 +69,22 @@ namespace login_and_register.Controllers
         //    return Ok(lec);
         //}
 
-        [HttpGet("{id}")]
+        [HttpGet("GetCourseLectures{id}")]
+        public async Task<IActionResult> GetCourseLectures(int id)
+        {
+            if (!await _context.Courses.AnyAsync(c => c.Id == id))
+                return BadRequest("Id is not valid");
+
+            var lectures = await _context.Lectures.Where(e => e.CourseId == id).ToListAsync();
+
+
+            if (lectures == null)
+                return NotFound("Lectures are not found");
+
+            return Ok(lectures);
+        }
+
+        [HttpGet("GetLecture{id}")]
         public async Task<IActionResult> Getlecture(int id)
         {
             if (!await _context.Lectures.AnyAsync(x => x.Id == id))

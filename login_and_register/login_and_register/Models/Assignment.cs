@@ -13,8 +13,11 @@ namespace login_and_register.Models
 
         public int CourseId { get; set; }
         public string Tittle { get; set; }
-        public string Describtion { get; set; }
-        public DateTime EndDate { get; set; }
+        public string? Describtion { get; set; }
+        public string? EndDate { get; set; }
+        public int Grade { get; set; }
+
+        public byte[]? File {  get; set; }
         public Course Course { get; set; }
     }
 }

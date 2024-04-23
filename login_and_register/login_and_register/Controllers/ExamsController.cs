@@ -27,27 +27,31 @@ namespace login_and_register.Controllers
 
             var exam = new Exam
             {
-               CourseId= id,
+              CourseId= id,
               Tittle = model.Tittle,
               Describtion = model.Describtion,
               Grades = model.Grades,
               Time = model.Time,
               Instructions = model.Instructions,
-              EndDate = model.EndDate,
+              Date = model.EndDate,
+              NumOfQuestions = model.NumOfQuestions,
             };
+
+            var questions =  exam.Questions.ToList();
+            var list = new {exam,questions };
 
             await _context.Exams.AddAsync(exam);
             _context.SaveChanges();
 
-            return Ok(exam);
+            return Ok(list);
             
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetExam(int id)
         {
 
-            var exam = await _context.Exams.FindAsync(id);
+            var exam = await _context.Exams.Include(e=>e.Questions).FirstOrDefaultAsync(e=>e.Id==id);
 
             if (exam == null)
                 return NotFound("Exam is not found");
@@ -56,8 +60,8 @@ namespace login_and_register.Controllers
 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetExamQuestion(int id)
+        [HttpGet("GetExamQuestions{id}")]
+        public async Task<IActionResult> GetExamQuestions(int id)
         {
             if (!await _context.Exams.AnyAsync(c => c.Id == id))
                 return BadRequest("Id is not valid");
@@ -69,6 +73,21 @@ namespace login_and_register.Controllers
                 return NotFound("question is not found");
 
             return Ok(questions);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCourseExams(int id)
+        {
+            if (!await _context.Courses.AnyAsync(c => c.Id == id))
+                return BadRequest("Id is not valid");
+
+            var exams = await _context.Exams.Include(e=>e.Questions).Where(e => e.CourseId == id).ToListAsync();
+
+
+            if (exams == null)
+                return NotFound("The coure has no exams");
+
+            return Ok(exams);
         }
 
         [HttpPut]
@@ -92,7 +111,7 @@ namespace login_and_register.Controllers
 
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteExam( int id)
         {
             if (!await _context.Exams.AnyAsync(e => e.Id == id))

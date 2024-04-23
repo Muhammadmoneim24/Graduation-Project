@@ -1,6 +1,5 @@
 ﻿using login_and_register.Dtos;
 using login_and_register.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,59 +10,106 @@ namespace login_and_register.Controllers
     public class CoursesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private List<string> _allowedExtensions = new List<string> { ".pdf", ".doc", ".png", ".jpg", ".jpeg" };
 
         public CoursesController(ApplicationDbContext context)
         {
             _context = context;
+
         }
 
         [HttpPost("CreateCourse")]
-
-        public async Task<IActionResult> CreateCourse(CourseModel course)
+        public async Task<IActionResult> CreateCourse([FromForm] CourseModel course)
         {
+            if (!_allowedExtensions.Contains(Path.GetExtension(course.photo.FileName).ToLower()))
+                return BadRequest("File extension is not allowed");
+
             if (course == null || !ModelState.IsValid)
                 return BadRequest("Bad Request");
 
-            var newcourse = new Course { 
-            
+            using var datastrem = new MemoryStream();
+            await course.photo.CopyToAsync(datastrem);
+
+            var newcourse = new Course
+            {
+
                 CourseName = course.Name,
                 Description = course.Description,
-                Link = course.Link,
+                File = datastrem.ToArray(),
             };
 
             await _context.Courses.AddAsync(newcourse);
             await _context.SaveChangesAsync();
+
+            var user = await _context.Users.FirstOrDefaultAsync(e=>e.Email==course.Email);
+            var crse = await _context.Courses.FirstOrDefaultAsync(e=>e.CourseName == course.Name);
+            System.Threading.Thread.Sleep(5000);
+            var enroll = new UserCourse { ApplicationUserId = user.Id, CourseId = crse.Id };
+            await _context.UserCourses.AddAsync(enroll);
+            await _context.SaveChangesAsync();
             return Ok(newcourse);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetCourse(int id) 
+
+
+        [HttpGet("GetUserCourses")]
+        public async Task<IActionResult> GetUserCourses([FromHeader] string usermail)
         {
-            if (!await _context.Courses.AnyAsync(c => c.Id == id))
+            if (!await _context.Users.AnyAsync(c => c.Email == usermail))
+                return BadRequest("Id is not valid");
+
+            var user = await _context.Users.FirstOrDefaultAsync(e => e.Email == usermail);
+            var usercourse = await _context.UserCourses.Include(e => e.Course).Where(e => e.ApplicationUserId == user.Id).ToListAsync();
+            //var courses = await _context.Courses.Where(e => e.Id == usercourse.CourseId).Include(e=>e.UserCourses).ToListAsync();
+
+            if (user == null || usercourse is null)
+                return NotFound("Lectures are not found");
+
+            var list = new { user, usercourse };
+
+            return Ok(list);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCourse(int id)
+        {
+            if (!await _context.Courses.AnyAsync(x => x.Id == id))
                 return BadRequest("Id is not valid");
 
             var course = await _context.Courses.FindAsync(id);
 
             if (course == null)
-                return NotFound("Corse is not found");
+                return NotFound("Lec is not found");
 
             return Ok(course);
         }
 
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCourse(int id , CourseModel course) 
+        public async Task<IActionResult> UpdateCourse(int id, [FromForm] CourseModel course)
         {
             if (!await _context.Courses.AnyAsync(c => c.Id == id))
                 return BadRequest("Id is not found");
 
-            var coursetoupdate = await _context.Courses.FindAsync (id);
+            var coursetoupdate = await _context.Courses.FindAsync(id);
 
             if (coursetoupdate == null)
                 return NotFound("Course is not found");
 
             coursetoupdate.CourseName = course.Name;
             coursetoupdate.Description = course.Description;
-            coursetoupdate.Link = course.Link;
+            if (course.photo != null)
+            {
+                if (!_allowedExtensions.Contains(Path.GetExtension(course.photo.FileName).ToLower()))
+                    return BadRequest("File extension is not allowed");
+
+
+                using var dataStraem = new MemoryStream();
+
+                await course.photo.CopyToAsync(dataStraem);
+
+                coursetoupdate.File = dataStraem.ToArray();
+            }
 
             _context.SaveChanges();
 
@@ -71,9 +117,9 @@ namespace login_and_register.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCourse(int id) 
+        public async Task<IActionResult> DeleteCourse(int id)
         {
-            if(!await _context.Courses.AllAsync(c => c.Id == id))
+            if (!await _context.Courses.AllAsync(c => c.Id == id))
                 return BadRequest("Id is not valid");
 
             var courseyodelete = await _context.Courses.FindAsync(id);

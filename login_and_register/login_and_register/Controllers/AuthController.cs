@@ -1,7 +1,9 @@
 ﻿using login_and_register.Dtos;
+using login_and_register.Models;
 using login_and_register.Sevices;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace login_and_register.Controllers
 {
@@ -10,10 +12,12 @@ namespace login_and_register.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly ApplicationDbContext _context;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, ApplicationDbContext context)
         {
             _authService = authService;
+            _context = context;
         }
 
         [HttpPost]
@@ -37,11 +41,14 @@ namespace login_and_register.Controllers
                 return BadRequest(ModelState);
 
             var result = await _authService.LoginAsync(model);
+            var userdata = await _context.Users.Include(e=>e.UserCourses).Where(e=>e.Email==model.Email).ToListAsync();
 
             if (!result.IsAuthenticated)
                 return BadRequest(result.Message);
 
-            return Ok(result);
+            var list = new {result,userdata };
+
+            return Ok(list);
         }
 
         //[HttpPost("addrole")]

@@ -18,28 +18,58 @@ namespace login_and_register.Controllers
         }
 
         [HttpPost("{id}")]
-        public async Task<IActionResult> CreateQuestion(int id,[FromBody] QuestionsModel question)
+        public async Task<IActionResult> CreateQuestion(int id,[FromBody] List<QuestionsModel> questions)
         {
 
 
-            if (question == null || !ModelState.IsValid)
+            if (questions == null || !ModelState.IsValid)
                 return NotFound("Model is not found");
-
-            var createdquestion = new Question
+ 
+            
+            foreach(var question in questions) 
             {
-                ExamId = id,
-                Text = question.Text,
-                Options = question.Options,
-                CorrectAnswer = question.CorrectAnswer,
-                Points = question.Points,
-                Explanation = question.Explanation
-            };
+                 var choices = "";
+                foreach(var op in question.choices) 
+                {
+                    choices +="/ "+op;
+                }
 
-            await _context.Questions.AddAsync(createdquestion);
+                var answer = "";
+                if(question.type == "multiple answers") 
+                {
+                    foreach(var ans in question.selectedAnswers) 
+                    {
+                        answer += "/ " + ans;
+                    } 
+
+                }
+                else 
+                {
+                    answer = question.correctAnswer;
+                }
+
+                
+                var createdquestion = new Question
+                {
+                    ExamId = id,
+                    Type = question.type,
+                    Text = question.question,
+                    Options = choices,
+                    CorrectAnswer = answer,
+                    Points = question.points,
+                    Explanation = question.explanaition
+                };
+
+                await _context.Questions.AddAsync(createdquestion);
+            }
+
+           
             _context.SaveChanges();
 
-            return Ok(createdquestion);
+            return Ok(questions);
         }
+
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetQuestion(int id)
@@ -66,10 +96,10 @@ namespace login_and_register.Controllers
             if (quest == null || question == null)
                 return NotFound("Model is not found");
 
-            question.Text = quest.Text;
-            question.Options = quest.Options;
-            question.CorrectAnswer = quest.CorrectAnswer;
-            question.Explanation = quest.Explanation;
+            question.Text = quest.question;
+            question.Options = quest.choices.ToString();
+            question.CorrectAnswer = quest.correctAnswer;
+            question.Explanation = quest.explanaition;
 
             _context.SaveChanges();
 

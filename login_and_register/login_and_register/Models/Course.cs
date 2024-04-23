@@ -12,7 +12,7 @@ namespace login_and_register.Models
         public int Id { get; set; }
         public string CourseName { get; set; }
         public string Description { get; set; }
-        public string Link { get; set; }
+        public byte []? File { get; set; }
 
         public int DiscussionId { get; set; }
         public Discussion Discussion { get; set; }

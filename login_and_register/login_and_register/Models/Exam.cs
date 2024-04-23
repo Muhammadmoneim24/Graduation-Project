@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace login_and_register.Models
@@ -22,11 +23,15 @@ namespace login_and_register.Models
         public string? Time { get; set; }
 
         public int Grades { get; set; }
-        public DateTime EndDate { get; set; }
+        public int NumOfQuestions { get; set; }
+
+        public string? Date { get; set; }
         public Course Course { get; set; }
 
         public Submission Submission { get; set; }
 
         public ICollection<Question> Questions { get; set; } = new List<Question>();
+   
+
     }
 }

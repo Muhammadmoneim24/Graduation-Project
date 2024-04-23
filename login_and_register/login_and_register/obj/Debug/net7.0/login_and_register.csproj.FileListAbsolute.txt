@@ -524,3 +524,6 @@ E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\l
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\login_and_register.genruntimeconfig.cache
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\ref\login_and_register.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Debug\net7.0\login_an.68E75792.Up2Date
+E:\4th CSE\Grad project\login_and_register\login_and_register\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
+E:\4th CSE\Grad project\login_and_register\login_and_register\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+E:\4th CSE\Grad project\login_and_register\login_and_register\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll

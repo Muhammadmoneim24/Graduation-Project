@@ -248,16 +248,22 @@ namespace login_and_register.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Describtion")
-                        .IsRequired()
-                        .HasMaxLength(500)
+                        .HasMaxLength(1000)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("EndDate")
+                        .HasMaxLength(1000)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<byte[]>("File")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
 
                     b.Property<string>("Tittle")
                         .IsRequired()
-                        .HasMaxLength(100)
+                        .HasMaxLength(500)
                         .HasColumnType("VARCHAR");
 
                     b.HasKey("Id");
@@ -317,9 +323,8 @@ namespace login_and_register.Migrations
                     b.Property<int>("DiscussionId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Link")
-                        .HasMaxLength(1000)
-                        .HasColumnType("VARCHAR");
+                    b.Property<byte[]>("File")
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
@@ -372,8 +377,12 @@ namespace login_and_register.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<byte[]>("File")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Tittle")
-                        .HasMaxLength(100)
+                        .HasMaxLength(255)
                         .HasColumnType("VARCHAR");
 
                     b.HasKey("Id");
@@ -399,13 +408,12 @@ namespace login_and_register.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Describtion")
-                        .HasMaxLength(500)
+                    b.Property<string>("Date")
+                        .HasMaxLength(255)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<string>("EndDate")
-                        .IsRequired()
-                        .HasMaxLength(255)
+                    b.Property<string>("Describtion")
+                        .HasMaxLength(500)
                         .HasColumnType("VARCHAR");
 
                     b.Property<int>("Grades")
@@ -414,6 +422,9 @@ namespace login_and_register.Migrations
                     b.Property<string>("Instructions")
                         .HasMaxLength(500)
                         .HasColumnType("VARCHAR");
+
+                    b.Property<int>("NumOfQuestions")
+                        .HasColumnType("INT");
 
                     b.Property<int>("SubmissionId")
                         .HasColumnType("int");
@@ -494,8 +505,7 @@ namespace login_and_register.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CorrectAnswer")
-                        .IsRequired()
-                        .HasMaxLength(255)
+                        .HasMaxLength(1000)
                         .HasColumnType("VARCHAR");
 
                     b.Property<int>("ExamId")
@@ -506,7 +516,6 @@ namespace login_and_register.Migrations
                         .HasColumnType("VARCHAR");
 
                     b.Property<string>("Options")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("VARCHAR");
 
@@ -516,6 +525,11 @@ namespace login_and_register.Migrations
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasMaxLength(1000)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(255)
                         .HasColumnType("VARCHAR");
 
                     b.HasKey("Id");
@@ -533,16 +547,14 @@ namespace login_and_register.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Answer")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("VARCHAR");
-
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Grade")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

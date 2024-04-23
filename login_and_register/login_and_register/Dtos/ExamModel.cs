@@ -1,4 +1,7 @@
-﻿namespace login_and_register.Dtos
+﻿using login_and_register.Models;
+using System.Text.Json.Serialization;
+
+namespace login_and_register.Dtos
 {
     public class ExamModel
     {
@@ -11,6 +14,11 @@
         public string Time { get; set; }
 
         public int Grades { get; set; }
-        public DateTime EndDate { get; set; }
+        public int NumOfQuestions { get; set; }
+        public string? EndDate { get; set; }
+
+        [JsonIgnore]
+        public Exam RelatedExam { get; set; }
+
     }
 }

@@ -12,7 +12,7 @@ namespace login_and_register.Controllers
     public class EnrollmentsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-       
+
         public EnrollmentsController(ApplicationDbContext context)
         {
             _context = context;
@@ -20,13 +20,16 @@ namespace login_and_register.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddEnrollment(EnrollmentModel enrollment) 
+        public async Task<IActionResult> AddEnrollment(EnrollmentModel enrollment)
         {
-            var course = await _context.Courses.Where(e=>e.Id==enrollment.CourseId).FirstOrDefaultAsync(e => e.CourseName == enrollment.CourseName);
-            var std = await _context.Users.FirstOrDefaultAsync(e=>e.Email == enrollment.Email);
+            var course = await _context.Courses.FindAsync(enrollment.CourseId);
+            var std = await _context.Users.FirstOrDefaultAsync(e => e.Email == enrollment.Email);
 
             if (course is null || std is null)
                 return BadRequest("User or course not found");
+
+            if (await _context.UserCourses.FindAsync(enrollment.CourseId) is not null)
+                return BadRequest("User is already enrolled in this course");
 
             var enroll = new UserCourse {
 
@@ -35,18 +38,23 @@ namespace login_and_register.Controllers
 
             };
 
+            if(enroll is null) 
+            {
+                return BadRequest("Bad Request");
+            }
+
             await _context.UserCourses.AddAsync(enroll);
             _context.SaveChanges();
 
             return Ok(enroll);
-        
+
         }
 
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEnrollment(int id,EnrollmentModel enrollment)
         {
-            var course = await _context.Courses.Where(e => e.Id == enrollment.CourseId).FirstOrDefaultAsync(e => e.CourseName == enrollment.CourseName);
+            var course = await _context.Courses.FindAsync(enrollment.CourseId);
             var std = await _context.Users.FirstOrDefaultAsync(e => e.Email == enrollment.Email);
 
             if (course is null || std is null)
@@ -65,7 +73,7 @@ namespace login_and_register.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetEnrolls( int id) 
         {
             var enroll = await _context.UserCourses.FirstOrDefaultAsync(e=>e.CourseId == id);
@@ -75,10 +83,10 @@ namespace login_and_register.Controllers
             return Ok(stds);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteeEnrollment(int id, EnrollmentModel enrollment)
         {
-            var course = await _context.Courses.Where(e => e.Id == enrollment.CourseId).FirstOrDefaultAsync(e => e.CourseName == enrollment.CourseName);
+            var course = await _context.Courses.FindAsync(enrollment.CourseId);
             var std = await _context.Users.FirstOrDefaultAsync(e => e.Email == enrollment.Email);
 
             if (course is null || std is null)

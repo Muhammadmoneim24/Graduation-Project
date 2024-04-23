@@ -13,6 +13,8 @@ namespace login_and_register.Models
 
         [ForeignKey("Exam")]
         public int ExamId { get; set; }
+
+        public string Type { get; set; }
         public string Text { get; set; }
         public string Options { get; set; }
         public string CorrectAnswer { get; set; }
