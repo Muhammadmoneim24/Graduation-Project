@@ -22,5 +22,7 @@ namespace login_and_register.Models
         public string? Explanation { get; set; }
 
         public Exam Exam { get; set; } 
+
+        public Submission? Submission { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace login_and_register.Models
 
         [ForeignKey("Course")]
         public int CourseId { get; set; }
-        public int SubmissionId { get; set; }
+
         public string? Tittle { get; set; }
 
         public string? Describtion { get; set; }
@@ -28,7 +28,7 @@ namespace login_and_register.Models
         public string? Date { get; set; }
         public Course Course { get; set; }
 
-        public Submission Submission { get; set; }
+        public Submission? Submission { get; set; }
 
         public ICollection<Question> Questions { get; set; } = new List<Question>();
    

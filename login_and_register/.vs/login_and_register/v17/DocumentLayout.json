@@ -3,28 +3,40 @@
   "WorkspaceRootPath": "E:\\4th CSE\\Grad project\\login_and_register\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\controllers\\submissionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\submissionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\dtos\\lecturemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\dtos\\lecturemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\dtos\\coursemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\dtos\\coursemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\dtos\\authmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\dtos\\authmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\models\\submission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\models\\submission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\controllers\\examscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\examscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\configurations\\questionconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\configurations\\questionconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\dtos\\submissionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\dtos\\submissionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\dtos\\assignmentmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\dtos\\assignmentmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\configurations\\examconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\configurations\\examconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,84 +46,119 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Program.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Program.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Program.cs",
-              "RelativeToolTip": "login_and_register\\Program.cs",
-              "ViewState": "AQIAAGUAAAAAAAAAAAAAACYAAAAPAAAA",
+              "DocumentIndex": 0,
+              "Title": "LectureModel.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\LectureModel.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Dtos\\LectureModel.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\LectureModel.cs",
+              "RelativeToolTip": "login_and_register\\Dtos\\LectureModel.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAA1wAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-20T13:58:09.202Z",
+              "WhenOpened": "2024-04-24T05:19:13.13Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ExamsController.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\ExamsController.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Controllers\\ExamsController.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\ExamsController.cs",
-              "RelativeToolTip": "login_and_register\\Controllers\\ExamsController.cs",
-              "ViewState": "AQIAADAAAAAAAAAAAAAowDwAAAAJAAAA",
+              "Title": "AuthModel.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\AuthModel.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Dtos\\AuthModel.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\AuthModel.cs",
+              "RelativeToolTip": "login_and_register\\Dtos\\AuthModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T15:01:44.453Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SubmissionsController.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\SubmissionsController.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Controllers\\SubmissionsController.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\SubmissionsController.cs",
-              "RelativeToolTip": "login_and_register\\Controllers\\SubmissionsController.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAYwCQAAAA2AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-13T18:28:13.546Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SubmissionModel.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\SubmissionModel.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Dtos\\SubmissionModel.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\SubmissionModel.cs",
-              "RelativeToolTip": "login_and_register\\Dtos\\SubmissionModel.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAzwBQAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-13T18:26:58.813Z",
+              "WhenOpened": "2024-04-24T05:20:47.067Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Submission.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Models\\Submission.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Models\\Submission.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Models\\Submission.cs",
-              "RelativeToolTip": "login_and_register\\Models\\Submission.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAuwBIAAAAmAAAA",
+              "Title": "CourseModel.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\CourseModel.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Dtos\\CourseModel.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\CourseModel.cs",
+              "RelativeToolTip": "login_and_register\\Dtos\\CourseModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-13T18:21:22.95Z",
+              "WhenOpened": "2024-04-24T05:10:05.493Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "AssignmentModel.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\AssignmentModel.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Dtos\\AssignmentModel.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\AssignmentModel.cs",
-              "RelativeToolTip": "login_and_register\\Dtos\\AssignmentModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAArAAAA",
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Models\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Models\\ApplicationUser.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Models\\ApplicationUser.cs",
+              "RelativeToolTip": "login_and_register\\Models\\ApplicationUser.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-20T14:40:53.219Z"
+              "WhenOpened": "2024-04-24T04:29:12.807Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Course.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Models\\Course.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Models\\Course.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Models\\Course.cs",
+              "RelativeToolTip": "login_and_register\\Models\\Course.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAuwA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T05:13:21.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\appsettings.json",
+              "RelativeDocumentMoniker": "login_and_register\\appsettings.json",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\appsettings.json",
+              "RelativeToolTip": "login_and_register\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-24T04:40:43.313Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ExamConfigurations.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Configurations\\ExamConfigurations.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Configurations\\ExamConfigurations.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Configurations\\ExamConfigurations.cs",
+              "RelativeToolTip": "login_and_register\\Configurations\\ExamConfigurations.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABoAAABhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T04:27:52.433Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Submission.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Models\\Submission.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Models\\Submission.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Models\\Submission.cs",
+              "RelativeToolTip": "login_and_register\\Models\\Submission.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAxwAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-13T18:21:22.95Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "QuestionConfigurations.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Configurations\\QuestionConfigurations.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Configurations\\QuestionConfigurations.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Configurations\\QuestionConfigurations.cs",
+              "RelativeToolTip": "login_and_register\\Configurations\\QuestionConfigurations.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABgAAABOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T03:10:01.908Z"
             }
           ]
         }

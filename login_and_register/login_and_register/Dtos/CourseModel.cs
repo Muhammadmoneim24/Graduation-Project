@@ -8,12 +8,8 @@ namespace login_and_register.Dtos
         public string Name { get; set; }
         public string Email { get; set; }
 
-
         public string Description { get; set; }
         public IFormFile? photo { get; set; }
-
-        [JsonIgnore]
-        public Course RelatedCourse { get; set; }
 
 
 

@@ -24,8 +24,7 @@ namespace login_and_register.Configurations
             builder.Property(e => e.NumOfQuestions).HasColumnType("INT").IsRequired();
             builder.Property(e => e.Date).HasColumnType("VARCHAR").HasMaxLength(255).IsRequired(false);
             builder.HasOne(x=>x.Course).WithMany(x=>x.Exams).HasForeignKey(x => x.CourseId);
-            builder.HasMany(x => x.Questions).WithOne(e => e.Exam).HasForeignKey(e => e.ExamId);                                                                                
-
+            builder.HasMany(x => x.Questions).WithOne(e => e.Exam).HasForeignKey(e => e.ExamId); 
 
 
             builder.ToTable("Exams");

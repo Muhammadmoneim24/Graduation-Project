@@ -13,10 +13,7 @@ namespace login_and_register.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public int SubmissionId { get; set; }
-        public int DiscussionId { get; set; }
-
-        public Submission Submission { get; set; }
+        public Submission? Submission { get; set; }
 
         public Discussion Discussion { get; set; }
 

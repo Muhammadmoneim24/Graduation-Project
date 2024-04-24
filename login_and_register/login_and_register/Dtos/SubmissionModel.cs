@@ -10,8 +10,7 @@ namespace login_and_register.Dtos
         public int Grade { get; set; }
         public List<QuestionSub> Questionssub { get; set; }
 
-        [JsonIgnore]
-        public Submission RelatedSubmission { get; set; }
+
     }
 
     public class QuestionSub 

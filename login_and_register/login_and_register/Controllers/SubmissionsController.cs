@@ -46,7 +46,7 @@ namespace login_and_register.Controllers
             return Ok(submission);
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetSubmission(int id) 
         {
             var submission = await _context.Submissions.FindAsync(id);

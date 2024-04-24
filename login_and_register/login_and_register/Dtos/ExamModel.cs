@@ -17,8 +17,7 @@ namespace login_and_register.Dtos
         public int NumOfQuestions { get; set; }
         public string? EndDate { get; set; }
 
-        [JsonIgnore]
-        public Exam RelatedExam { get; set; }
+       
 
     }
 }

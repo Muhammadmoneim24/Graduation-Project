@@ -11,8 +11,6 @@ namespace login_and_register.Dtos
 
         public IFormFile File { get; set; }
 
-        [JsonIgnore]
-        public Lecture RelatedLecture { get; set; }
 
     }
 }

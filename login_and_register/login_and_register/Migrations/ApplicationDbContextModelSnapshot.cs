@@ -167,9 +167,6 @@ namespace login_and_register.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DiscussionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -212,9 +209,6 @@ namespace login_and_register.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SubmissionId")
-                        .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -320,9 +314,6 @@ namespace login_and_register.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<int>("DiscussionId")
-                        .HasColumnType("int");
-
                     b.Property<byte[]>("File")
                         .HasColumnType("varbinary(max)");
 
@@ -425,9 +416,6 @@ namespace login_and_register.Migrations
 
                     b.Property<int>("NumOfQuestions")
                         .HasColumnType("INT");
-
-                    b.Property<int>("SubmissionId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Time")
                         .IsRequired()
@@ -555,7 +543,14 @@ namespace login_and_register.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Grade")
+                        .HasColumnType("INT");
+
+                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
+
+                    b.Property<string>("StudentAnswer")
+                        .HasMaxLength(500)
+                        .HasColumnType("VARCHAR");
 
                     b.HasKey("Id");
 
@@ -563,6 +558,9 @@ namespace login_and_register.Migrations
                         .IsUnique();
 
                     b.HasIndex("ExamId")
+                        .IsUnique();
+
+                    b.HasIndex("QuestionId")
                         .IsUnique();
 
                     b.ToTable("Submissions", (string)null);
@@ -781,9 +779,17 @@ namespace login_and_register.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("login_and_register.Models.Question", "Question")
+                        .WithOne("Submission")
+                        .HasForeignKey("login_and_register.Models.Submission", "QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Exam");
+
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("login_and_register.Models.UserCourse", b =>
@@ -831,8 +837,7 @@ namespace login_and_register.Migrations
                     b.Navigation("Discussion")
                         .IsRequired();
 
-                    b.Navigation("Submission")
-                        .IsRequired();
+                    b.Navigation("Submission");
 
                     b.Navigation("UserCourses");
 
@@ -864,8 +869,7 @@ namespace login_and_register.Migrations
                 {
                     b.Navigation("Questions");
 
-                    b.Navigation("Submission")
-                        .IsRequired();
+                    b.Navigation("Submission");
                 });
 
             modelBuilder.Entity("login_and_register.Models.Notification", b =>
@@ -873,6 +877,11 @@ namespace login_and_register.Migrations
                     b.Navigation("CourseNotifications");
 
                     b.Navigation("UserNotifications");
+                });
+
+            modelBuilder.Entity("login_and_register.Models.Question", b =>
+                {
+                    b.Navigation("Submission");
                 });
 #pragma warning restore 612, 618
         }

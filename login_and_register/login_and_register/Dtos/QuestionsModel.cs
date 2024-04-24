@@ -17,8 +17,6 @@ namespace login_and_register.Dtos
         public string? explanaition { get; set; }
         public string []? selectedAnswers { get; set; }
 
-        [JsonIgnore]
-        public Question RelatedQuestion { get; set; }
 
 
     }

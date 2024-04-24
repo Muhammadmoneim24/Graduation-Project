@@ -14,7 +14,6 @@ namespace login_and_register.Models
         public string Description { get; set; }
         public byte []? File { get; set; }
 
-        public int DiscussionId { get; set; }
         public Discussion Discussion { get; set; }
 
         public ICollection<UserCourse> UserCourses { get; set; } = new List<UserCourse>();
@@ -23,7 +22,6 @@ namespace login_and_register.Models
         public ICollection<Exam> Exams { get; set; } = new List<Exam>();
         public ICollection<Assignment> Assignments { get; set; } = new List<Assignment>();
         public ICollection<Lecture> Lectures { get; set; } = new List<Lecture>();
-
 
 
 

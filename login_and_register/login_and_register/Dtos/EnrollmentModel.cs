@@ -12,8 +12,7 @@ namespace login_and_register.Dtos
 
         public int CourseId { get; set; }
 
-        [JsonIgnore]
-        public UserCourse RelatedUserCourse { get; set; }
+
 
     }
 }

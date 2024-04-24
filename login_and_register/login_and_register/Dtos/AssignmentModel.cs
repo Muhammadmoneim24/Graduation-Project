@@ -12,7 +12,5 @@ namespace login_and_register.Dtos
 
         public IFormFile? File { get; set; }
 
-        [JsonIgnore]
-        public Assignment RelatedAssignment { get; set; }
     }
 }
