@@ -21,21 +21,23 @@ namespace login_and_register.Controllers
         [HttpPost("CreateCourse")]
         public async Task<IActionResult> CreateCourse([FromForm] CourseModel course)
         {
-            if (!_allowedExtensions.Contains(Path.GetExtension(course.photo.FileName).ToLower()))
-                return BadRequest("File extension is not allowed");
-
+           
             if (course == null || !ModelState.IsValid)
                 return BadRequest("Bad Request");
 
-            using var datastrem = new MemoryStream();
-            await course.photo.CopyToAsync(datastrem);
-
+            using var datastream = new MemoryStream();
+            if (course.photo != null)
+            {
+                if (!_allowedExtensions.Contains(Path.GetExtension(course.photo.FileName).ToLower()))
+                    return BadRequest("File extension is not allowed");
+                await course.photo.CopyToAsync(datastream);
+            }
             var newcourse = new Course
             {
 
                 CourseName = course.Name,
                 Description = course.Description,
-                File = datastrem.ToArray(),
+                File = course.photo is null? null:datastream.ToArray(),
             };
 
             await _context.Courses.AddAsync(newcourse);

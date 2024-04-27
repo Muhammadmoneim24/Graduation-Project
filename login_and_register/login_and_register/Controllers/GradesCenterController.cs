@@ -16,8 +16,8 @@ namespace login_and_register.Controllers
             _context = context;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetGrades(int id)
+        [HttpGet("GetExaamGrades/{id}")]
+        public async Task<IActionResult> GetExaamGrades(int id)
         {
             if (!await _context.Submissions.AnyAsync(e => e.ExamId == id))
                 return BadRequest("Exam's grades are not Found");
@@ -36,21 +36,78 @@ namespace login_and_register.Controllers
             return Ok(studentGrades);
         }
 
-        [HttpGet("{examid}/{studentid}")]
+        [HttpGet("GetStudentExam/{examid}/{studentid}")]
         public async Task<IActionResult> GetStudentExam(int examid,string studentid )
         {
-            var exam = await _context.Exams.FindAsync(examid);
+            var exam = await _context.Exams.Include(e => e.Questions).FirstOrDefaultAsync(e => e.Id == examid);
             var student = await _context.Users.FindAsync(studentid);
 
             if (exam is null || student is null)
+                return NotFound("Exam or student is not found");
+
+            var studentAnswers = await _context.Submissions
+                .Where(s => s.ApplicationUserId == studentid && s.ExamId == examid)
+                .GroupBy(s => s.QuestionId) 
+                .Select(g => g.OrderByDescending(s => s.Id).FirstOrDefault()) // Take the latest submission for each question
+                .ToDictionaryAsync(s => s.QuestionId, s => s.StudentAnswer);
+
+            var examWithStudentAnswers = new
+            {
+                exam.Id,
+                exam.CourseId,
+                exam.Tittle,
+                exam.Describtion,
+                exam.Instructions,
+                exam.Time,
+                exam.Grades,
+                exam.NumOfQuestions,
+                exam.Date,
+                exam.Questions,
+                StudentAnswers = studentAnswers
+            } ;
+
+            return Ok(examWithStudentAnswers);
+
+        }
+
+        [HttpGet("GetAssignmentGrades/{id}")]
+        public async Task<IActionResult> GetAssignmentGrades(int id)
+        {
+            if (!await _context.SubmissionAssignments.AnyAsync(e => e.AssignmentId == id))
+                return BadRequest("Assignment's grades are not Found");
+
+            var AssstdGrades = await _context.SubmissionAssignments.Where(ex => ex.AssignmentId == id).Select(sub => new
+            {
+                sub.ApplicationUser,
+                sub.Grade
+            }).ToListAsync();
+
+            if (AssstdGrades == null || !AssstdGrades.Any())
+            {
+                return NotFound("No submissions found for this exam");
+            }
+
+            return Ok(AssstdGrades);
+        }
+
+        [HttpGet("GetStudentAssignment/{Assignid}/{studentid}")]
+        public async Task<IActionResult> GetStudentAssignment(int Assignid, string studentid)
+        {
+            var assign = await _context.Assignments.FindAsync(Assignid);
+            var student = await _context.Users.FindAsync(studentid);
+
+            if (assign is null || student is null)
                 return NotFound("Data is not found");
 
-            var studentExam = await _context.Submissions.Include(e=>e.Exam.Questions).Where(e => e.ApplicationUserId == student.Id).Select(e=>e.Exam).ToListAsync();
-            var data = new {student,studentExam };
-            
+            var studentAssignment = await _context.SubmissionAssignments.Where(e => e.ApplicationUserId == student.Id).FirstOrDefaultAsync(e => e.AssignmentId == assign.Id);
+            var data = new { student, studentAssignment };
+
 
             return Ok(data);
 
         }
+
+
+
     }
 }

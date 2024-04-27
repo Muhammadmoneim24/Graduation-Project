@@ -25,6 +25,9 @@ namespace login_and_register.Configurations
             builder.HasOne(s => s.Exam).WithOne(s => s.Submission).HasForeignKey<Submission>(s => s.ExamId);
             builder.HasOne(s => s.Question).WithOne(s => s.Submission).HasForeignKey<Submission>(s=>s.QuestionId);
 
+            builder.HasIndex(s => s.ApplicationUserId).IsUnique(false);
+            builder.HasIndex(s => s.QuestionId).IsUnique(false);
+            builder.HasIndex(s => s.ExamId).IsUnique(false);
 
             builder.ToTable("Submissions");
 

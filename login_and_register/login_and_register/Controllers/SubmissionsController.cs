@@ -25,22 +25,24 @@ namespace login_and_register.Controllers
             if(user == null) 
                 return NotFound("User is not found");
 
+            if (await _context.Submissions.Where(e => e.ExamId == submission.ExamId).AnyAsync(e => e.ApplicationUserId == user.Id))
+                return BadRequest("User is already submitted the exam");
+
 
             foreach (var qsub in submission.Questionssub)
             {
-                var sub = new Submission
+               
+               var sub = new Submission
                 {
-                    ApplicationUserId = user.Id,
-                    ExamId = submission.ExamId,
-                    Grade = submission.Grade,
-                    QuestionId = qsub.QuestionId,
-                    StudentAnswer = qsub.StudentAnswer
+                   ApplicationUserId = user.Id,
+                   ExamId = submission.ExamId,
+                   Grade = submission.Grade,
+                   QuestionId = qsub.QuestionId,
+                   StudentAnswer = qsub.StudentAnswer
                 };
-
                 await _context.Submissions.AddAsync(sub);
             }
 
-           
             await _context.SaveChangesAsync();
 
             return Ok(submission);

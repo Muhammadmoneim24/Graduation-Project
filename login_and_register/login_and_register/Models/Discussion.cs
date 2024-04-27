@@ -16,7 +16,7 @@ namespace login_and_register.Models
         public string Tittle { get; set; }
         public string Content { get; set; }
 
-        public byte[] File { get; set; }
+        public byte[]? File { get; set; }
         public Course Course { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 

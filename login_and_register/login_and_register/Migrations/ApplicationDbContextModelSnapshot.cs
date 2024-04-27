@@ -369,7 +369,6 @@ namespace login_and_register.Migrations
                         .HasColumnType("int");
 
                     b.Property<byte[]>("File")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Tittle")
@@ -554,16 +553,45 @@ namespace login_and_register.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Submissions", (string)null);
+                });
+
+            modelBuilder.Entity("login_and_register.Models.SubmissionAssignment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AssignmentId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("File")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("INT");
+
+                    b.HasKey("Id");
+
                     b.HasIndex("ApplicationUserId")
                         .IsUnique();
 
-                    b.HasIndex("ExamId")
+                    b.HasIndex("AssignmentId")
                         .IsUnique();
 
-                    b.HasIndex("QuestionId")
-                        .IsUnique();
-
-                    b.ToTable("Submissions", (string)null);
+                    b.ToTable("SubmissionAssignments");
                 });
 
             modelBuilder.Entity("login_and_register.Models.UserCourse", b =>
@@ -792,6 +820,25 @@ namespace login_and_register.Migrations
                     b.Navigation("Question");
                 });
 
+            modelBuilder.Entity("login_and_register.Models.SubmissionAssignment", b =>
+                {
+                    b.HasOne("login_and_register.Models.ApplicationUser", "ApplicationUser")
+                        .WithOne("SubmissionAssignment")
+                        .HasForeignKey("login_and_register.Models.SubmissionAssignment", "ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("login_and_register.Models.Assignment", "Assignment")
+                        .WithOne("SubmissionAssignment")
+                        .HasForeignKey("login_and_register.Models.SubmissionAssignment", "AssignmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Assignment");
+                });
+
             modelBuilder.Entity("login_and_register.Models.UserCourse", b =>
                 {
                     b.HasOne("login_and_register.Models.ApplicationUser", "ApplicationUser")
@@ -839,9 +886,16 @@ namespace login_and_register.Migrations
 
                     b.Navigation("Submission");
 
+                    b.Navigation("SubmissionAssignment");
+
                     b.Navigation("UserCourses");
 
                     b.Navigation("UserNotifications");
+                });
+
+            modelBuilder.Entity("login_and_register.Models.Assignment", b =>
+                {
+                    b.Navigation("SubmissionAssignment");
                 });
 
             modelBuilder.Entity("login_and_register.Models.Course", b =>

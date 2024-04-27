@@ -578,14 +578,46 @@
   },
   {
     "ContainingType": "login_and_register.Controllers.GradesCenterController",
-    "Method": "GetStudentExam",
-    "RelativePath": "api/GradesCenter/{examid}/{studentid}",
+    "Method": "GetAssignmentGrades",
+    "RelativePath": "api/GradesCenter/GetAssignmentGrades/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "examid",
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "login_and_register.Controllers.GradesCenterController",
+    "Method": "GetExaamGrades",
+    "RelativePath": "api/GradesCenter/GetExaamGrades/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "login_and_register.Controllers.GradesCenterController",
+    "Method": "GetStudentAssignment",
+    "RelativePath": "api/GradesCenter/GetStudentAssignment/{Assignid}/{studentid}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Assignid",
         "Type": "System.Int32",
         "IsRequired": true
       },
@@ -599,15 +631,20 @@
   },
   {
     "ContainingType": "login_and_register.Controllers.GradesCenterController",
-    "Method": "GetGrades",
-    "RelativePath": "api/GradesCenter/{id}",
+    "Method": "GetStudentExam",
+    "RelativePath": "api/GradesCenter/GetStudentExam/{examid}/{studentid}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "examid",
         "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "studentid",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -793,6 +830,53 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "login_and_register.Controllers.SubmissionAssignmentsController",
+    "Method": "AddSubmission",
+    "RelativePath": "api/SubmissionAssignments/AddAssignmentSubmission",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AssignmentId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Grade",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "login_and_register.Controllers.SubmissionAssignmentsController",
+    "Method": "GetAssignmentSubmission",
+    "RelativePath": "api/SubmissionAssignments/GetAssignmentSubmission/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "login_and_register.Controllers.SubmissionsController",
     "Method": "AddSubmission",
     "RelativePath": "api/Submissions",
@@ -811,7 +895,7 @@
   {
     "ContainingType": "login_and_register.Controllers.SubmissionsController",
     "Method": "GetSubmission",
-    "RelativePath": "api/Submissions/GetSubmission{Id}",
+    "RelativePath": "api/Submissions/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

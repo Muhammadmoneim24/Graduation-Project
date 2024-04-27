@@ -14,6 +14,7 @@ namespace login_and_register.Models
         public string LastName { get; set; }
 
         public Submission? Submission { get; set; }
+        public SubmissionAssignment?  SubmissionAssignment { get; set; }
 
         public Discussion Discussion { get; set; }
 

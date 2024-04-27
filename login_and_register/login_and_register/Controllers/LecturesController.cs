@@ -21,22 +21,25 @@ namespace login_and_register.Controllers
         [HttpPost("{id}")]
         public async Task<IActionResult> Createlecture(int id, [FromForm] LectureModel lecture)
         {
-            if (!_allowedExtensions.Contains(Path.GetExtension(lecture.File.FileName).ToLower()))
-                return BadRequest("File extension is not allowed");
-
             if (lecture == null || !ModelState.IsValid)
                 return NotFound("Model is not found");
 
-            using var datastrem = new MemoryStream();
-            await lecture.File.CopyToAsync(datastrem);
+            using var datastream = new MemoryStream();
+            if (lecture.File != null)
+            {
+                if (!_allowedExtensions.Contains(Path.GetExtension(lecture.File.FileName).ToLower()))
+                    return BadRequest("File extension is not allowed");
+                await lecture.File.CopyToAsync(datastream);
+            }
 
-            var lec = new Lecture
+
+                var lec = new Lecture
             {
                 CourseId = id,
                 Name = lecture.Name,
                 Description = lecture.Description,
                 Link = lecture.Link,
-                LecFile = datastrem.ToArray(),
+                LecFile = lecture.File is null? null: datastream.ToArray(),
 
             };
 

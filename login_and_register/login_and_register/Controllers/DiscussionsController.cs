@@ -23,21 +23,22 @@ namespace login_and_register.Controllers
         {
             var user = await _context.Users.FirstOrDefaultAsync(e => e.Email == discussion.UserEmail);
 
-            if (!_allowedExtensions.Contains(Path.GetExtension(discussion.File.FileName).ToLower()))
-                return BadRequest("File extension is not allowed");
-
-            if (discussion == null || !ModelState.IsValid || user is null)
+            if (discussion == null || !ModelState.IsValid )
                 return NotFound("Model is not found");
 
             var datastream = new MemoryStream();
-            await discussion.File.CopyToAsync(datastream);
-
+            if (discussion.File != null)
+            {
+                if (!_allowedExtensions.Contains(Path.GetExtension(discussion.File.FileName).ToLower()))
+                    return BadRequest("File extension is not allowed");
+                await discussion.File.CopyToAsync(datastream);
+            }
             var disc = new Discussion
             {
                 CourseId = id,
                 Tittle = discussion.Tittle,
                 Content = discussion.Content ,
-                File = datastream.ToArray(),
+                File = discussion.File is null? null:datastream.ToArray(),
             };
 
             await _context.Discussions.AddAsync(disc);

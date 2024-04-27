@@ -21,6 +21,8 @@ namespace login_and_register.Models
         public DbSet<CourseNotification> CourseNotificationss { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Submission> Submissions { get; set; }
+        public DbSet<SubmissionAssignment> SubmissionAssignments { get; set; }
+
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
