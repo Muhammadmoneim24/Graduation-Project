@@ -19,7 +19,7 @@ namespace login_and_register.Models
 
         public byte[]? File {  get; set; }
         public Course Course { get; set; }
-        public SubmissionAssignment? SubmissionAssignment { get; set; }
+        public virtual SubmissionAssignment? SubmissionAssignment { get; set; }
 
     }
 }

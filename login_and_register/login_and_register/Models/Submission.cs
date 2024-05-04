@@ -17,9 +17,9 @@ namespace login_and_register.Models
         public int QuestionId { get; set; }
         public string StudentAnswer {  get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
-        public Exam Exam { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
+        public virtual Exam Exam { get; set; }
 
-        public Question Question { get; set; }
+        public virtual Question Question { get; set; }
     }
 }

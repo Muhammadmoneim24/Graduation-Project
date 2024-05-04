@@ -25,13 +25,12 @@ namespace login_and_register.Controllers
             if (questions == null || !ModelState.IsValid)
                 return NotFound("Model is not found");
  
-            
-            foreach(var question in questions) 
+            foreach (var question in questions) 
             {
                  var choices = "";
                 foreach(var op in question.choices) 
                 {
-                    choices +="/ "+op;
+                    choices +="/"+op;
                 }
 
                 var answer = "";
@@ -39,7 +38,7 @@ namespace login_and_register.Controllers
                 {
                     foreach(var ans in question.selectedAnswers) 
                     {
-                        answer += "/ " + ans;
+                        answer += "/" + ans;
                     } 
 
                 }
@@ -60,11 +59,17 @@ namespace login_and_register.Controllers
                     Explanation = question.explanaition
                 };
 
+
+
                 await _context.Questions.AddAsync(createdquestion);
+
             }
 
+            
            
             _context.SaveChanges();
+
+           
 
             return Ok(questions);
         }

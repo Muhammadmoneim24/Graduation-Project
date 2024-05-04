@@ -3,7 +3,9 @@ using login_and_register.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 
 namespace login_and_register.Controllers
 {
@@ -38,7 +40,19 @@ namespace login_and_register.Controllers
               NumOfQuestions = model.NumOfQuestions,
             };
 
-            var questions =  exam.Questions.ToList();
+            var separator = new char[] { '/' };
+            var questions =  exam.Questions.Where(e => e.ExamId == id)
+                .Select(e => new {
+                    e.Id,
+                    e.ExamId,
+                    e.Type,
+                    e.Text,
+                    Options = e.Options.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList(),
+                    CorrectAnswer = e.CorrectAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList(),
+                    e.Points,
+                    e.Explanation
+                })
+                .ToList();
             var list = new {exam,questions };
 
             await _context.Exams.AddAsync(exam);
@@ -51,14 +65,30 @@ namespace login_and_register.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetExam(int id)
         {
-
-            var exam = await _context.Exams.Include(e=>e.Questions).FirstOrDefaultAsync(e=>e.Id==id);
+            var exam = await _context.Exams.FindAsync(id);
 
             if (exam == null)
                 return NotFound("Exam is not found");
-           
-            return Ok(exam);
 
+            var separator = new char[] { '/' };
+
+            var Questions = await _context.Questions
+                .Where(e => e.ExamId == id)
+                .Select(e => new {
+                    e.Id,
+                    e.ExamId,
+                    e.Type,
+                    e.Text,
+                    Options = e.Options.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList() ,
+                    CorrectAnswer = e.CorrectAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList(),
+                    e.Points,
+                    e.Explanation
+                })
+                .ToListAsync();
+
+            
+
+            return Ok(new { exam, Questions } );
         }
 
         [HttpGet("GetExamQuestions{id}")]

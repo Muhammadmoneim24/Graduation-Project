@@ -1,4 +1,5 @@
-﻿using login_and_register.Models;
+﻿using login_and_register.Dtos;
+using login_and_register.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -39,32 +40,52 @@ namespace login_and_register.Controllers
         [HttpGet("GetStudentExam/{examid}/{studentid}")]
         public async Task<IActionResult> GetStudentExam(int examid,string studentid )
         {
-            var exam = await _context.Exams.Include(e => e.Questions).FirstOrDefaultAsync(e => e.Id == examid);
+            var exam = await _context.Exams.FindAsync( examid);
             var student = await _context.Users.FindAsync(studentid);
+
+
+            var separator = new char[] { '/',',' };
+            var Questions = await _context.Questions
+               .Where(e => e.ExamId == examid)
+               .Select(e => new {
+                   e.Id,
+                   e.ExamId,
+                   e.Type,
+                   e.Text,
+                   Options = e.Options.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList(),
+                   CorrectAnswer = e.CorrectAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList(),
+                   e.Points,
+                   e.Explanation
+               })
+               .ToListAsync();
 
             if (exam is null || student is null)
                 return NotFound("Exam or student is not found");
 
             var studentAnswers = await _context.Submissions
-                .Where(s => s.ApplicationUserId == studentid && s.ExamId == examid)
-                .GroupBy(s => s.QuestionId) 
-                .Select(g => g.OrderByDescending(s => s.Id).FirstOrDefault()) // Take the latest submission for each question
-                .ToDictionaryAsync(s => s.QuestionId, s => s.StudentAnswer);
+                .Where(s => s.ExamId == examid && s.ApplicationUserId == studentid)
+                .Select(e => new {
+                    e.ApplicationUserId,
+                    e.QuestionId,
+                    StudentAnswer = e.StudentAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList(),
+                }).ToListAsync();
+
 
             var examWithStudentAnswers = new
             {
-                exam.Id,
-                exam.CourseId,
-                exam.Tittle,
-                exam.Describtion,
-                exam.Instructions,
-                exam.Time,
-                exam.Grades,
-                exam.NumOfQuestions,
-                exam.Date,
-                exam.Questions,
-                StudentAnswers = studentAnswers
-            } ;
+                exam,
+                Questions = Questions.Select(q => new
+                {
+                    q.Id,
+                    q.Type,
+                    q.Text,
+                    q.Options,
+                    q.CorrectAnswer,
+                    q.Points,
+                    q.Explanation,
+                    studentAnswers.FirstOrDefault(sa => sa.QuestionId == q.Id)?.StudentAnswer
+                }).ToList()
+            };
 
             return Ok(examWithStudentAnswers);
 
