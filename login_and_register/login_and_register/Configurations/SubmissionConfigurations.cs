@@ -15,19 +15,19 @@ namespace login_and_register.Configurations
         public void Configure(EntityTypeBuilder<Submission> builder)
         {
             builder.HasKey(s => s.Id);
-            builder.Property(s =>s.Id).ValueGeneratedOnAdd();
+            builder.Property(s => s.Id).ValueGeneratedOnAdd();
 
 
             builder.Property(s => s.Grade).HasColumnType("INT");
-            builder.Property(s => s.StudentAnswer).HasColumnType("VARCHAR").HasMaxLength(500).IsRequired(false);
 
-            builder.HasOne(s => s.ApplicationUser).WithOne(s => s.Submission).HasForeignKey<Submission>(s =>s.ApplicationUserId);
+
+            builder.HasOne(s => s.ApplicationUser).WithOne(s => s.Submission).HasForeignKey<Submission>(s => s.ApplicationUserId);
             builder.HasOne(s => s.Exam).WithOne(s => s.Submission).HasForeignKey<Submission>(s => s.ExamId);
-            builder.HasOne(s => s.Question).WithOne(s => s.Submission).HasForeignKey<Submission>(s=>s.QuestionId);
 
-            builder.HasIndex(s => s.ApplicationUserId).IsUnique(false);
-            builder.HasIndex(s => s.QuestionId).IsUnique(false);
+
             builder.HasIndex(s => s.ExamId).IsUnique(false);
+
+
 
             builder.ToTable("Submissions");
 

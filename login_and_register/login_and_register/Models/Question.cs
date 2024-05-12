@@ -21,8 +21,8 @@ namespace login_and_register.Models
         public int Points { get; set; }
         public string? Explanation { get; set; }
 
-        public Exam Exam { get; set; } 
+        public virtual Exam Exam { get; set; } 
 
-        public virtual Submission? Submission { get; set; }
+        public virtual ICollection<QuestionsSubs> QuestionsSubs { get; set; }
     }
 }

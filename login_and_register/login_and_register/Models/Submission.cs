@@ -14,12 +14,10 @@ namespace login_and_register.Models
         public string ApplicationUserId { get; set; }
         public int ExamId { get; set; }
         public int Grade { get; set; }
-        public int QuestionId { get; set; }
-        public string StudentAnswer {  get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual Exam Exam { get; set; }
 
-        public virtual Question Question { get; set; }
+        public virtual ICollection<QuestionsSubs> QuestionsSubs { get; set; }
     }
 }

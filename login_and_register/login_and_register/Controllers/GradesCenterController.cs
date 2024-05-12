@@ -42,6 +42,7 @@ namespace login_and_register.Controllers
         {
             var exam = await _context.Exams.FindAsync( examid);
             var student = await _context.Users.FindAsync(studentid);
+            var sub = await _context.Submissions.FirstOrDefaultAsync(e => e.ExamId == examid && e.ApplicationUserId == studentid);
 
 
             var separator = new char[] { '/',',' };
@@ -62,28 +63,30 @@ namespace login_and_register.Controllers
             if (exam is null || student is null)
                 return NotFound("Exam or student is not found");
 
-            var studentAnswers = await _context.Submissions
-                .Where(s => s.ExamId == examid && s.ApplicationUserId == studentid)
-                .Select(e => new {
-                    e.ApplicationUserId,
-                    e.QuestionId,
-                    StudentAnswer = e.StudentAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList(),
-                }).ToListAsync();
+            var questionIds = Questions.Select(q => q.Id).ToList();
 
+            var studentAnswers = await _context.QuestionsSubs
+                .Where(s => s.SubmissionId == sub.Id && questionIds.Contains(s.QuestionId))
+                .ToListAsync();
 
             var examWithStudentAnswers = new
             {
-                exam,
+                exam =new { exam.Id,exam.CourseId,exam.Tittle,exam.Describtion,exam.Date,exam.Time,exam.Grades,exam.Instructions,exam.NumOfQuestions},
                 Questions = Questions.Select(q => new
                 {
                     q.Id,
+                    q.ExamId,
                     q.Type,
                     q.Text,
                     q.Options,
-                    q.CorrectAnswer,
+                    CorrectAnswr = q.CorrectAnswer.OrderByDescending(o => int.Parse(o)).ToList(),
                     q.Points,
                     q.Explanation,
-                    studentAnswers.FirstOrDefault(sa => sa.QuestionId == q.Id)?.StudentAnswer
+                    StudentAnswer = studentAnswers
+                        .Where(sa => sa.QuestionId == q.Id)
+                        .SelectMany(e => e.StudentAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries))
+                        .OrderByDescending(o => int.Parse(o))
+                        .ToList()
                 }).ToList()
             };
 

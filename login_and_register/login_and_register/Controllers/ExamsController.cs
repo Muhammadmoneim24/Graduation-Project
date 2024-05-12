@@ -80,13 +80,28 @@ namespace login_and_register.Controllers
                     e.Type,
                     e.Text,
                     Options = e.Options.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList() ,
-                    CorrectAnswer = e.CorrectAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList(),
+                    CorrectAnswer = e.CorrectAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries)
+                            
+                             .ToArray(),
                     e.Points,
                     e.Explanation
                 })
                 .ToListAsync();
 
-            
+            var examWithCorrectAnswers = Questions.Select(q => new {
+                q.Id,
+                q.ExamId,
+                q.Type,
+                q.Text,
+                q.Options,
+                CorrectAnswer = q.CorrectAnswer
+                .OrderByDescending(o => int.Parse(o))
+                .ToArray(),
+                q.Points,
+                q.Explanation
+            }).ToList();
+
+
 
             return Ok(new { exam, Questions } );
         }

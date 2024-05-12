@@ -19,44 +19,56 @@ namespace login_and_register.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddSubmission(SubmissionModel submission) 
+        public async Task<IActionResult> AddSubmission(SubmissionModel submissionModel)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(e=>e.Email== submission.Email);
-            if(user == null) 
+            var user = await _context.Users.FirstOrDefaultAsync(e => e.Email == submissionModel.Email);
+            if (user == null)
                 return NotFound("User is not found");
 
-            if (await _context.Submissions.Where(e => e.ExamId == submission.ExamId).AnyAsync(e => e.ApplicationUserId == user.Id))
-                return BadRequest("User is already submitted the exam");
+            if (await _context.Submissions.Where(e => e.ExamId == submissionModel.ExamId).AnyAsync(e => e.ApplicationUserId == user.Id))
+                return BadRequest("User has already submitted the exam");
 
-
-            foreach (var qsub in submission.Questionssub)
+            var sub = new Submission
             {
-               
-               var sub = new Submission
-                {
-                   ApplicationUserId = user.Id,
-                   ExamId = submission.ExamId,
-                   Grade = submission.Grade,
-                   QuestionId = qsub.QuestionId,
-                   StudentAnswer = qsub.StudentAnswer
-                };
-                await _context.Submissions.AddAsync(sub);
-            }
+                ApplicationUserId = user.Id,
+                ExamId = submissionModel.ExamId,
+                Grade = submissionModel.Grade
+            };
 
+            await _context.Submissions.AddAsync(sub);
             await _context.SaveChangesAsync();
 
-            return Ok(submission);
+            foreach (var questionSub in submissionModel.Questionssub)
+            {
+                var questionSubmission = new QuestionsSubs
+                {
+                    SubmissionId = sub.Id,
+                    QuestionId = questionSub.QuestionId,
+                    StudentAnswer = questionSub.StudentAnswer
+                };
+
+                await _context.QuestionsSubs.AddAsync(questionSubmission);
+
+            }
+
+            _context.SaveChanges();
+
+            return Ok(submissionModel);
         }
 
+
+
+
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetSubmission(int id) 
+        public async Task<IActionResult> GetSubmission(int id)
         {
-            var submission = await _context.Submissions.FindAsync(id);
+            var submission = await _context.Submissions.Where(e => e.ExamId == id).FirstOrDefaultAsync();
+            var quest = await _context.QuestionsSubs.Where(w => w.SubmissionId == submission.Id).Select(e => new {e.QuestionId,e.StudentAnswer }).ToListAsync();
 
             if (submission == null)
                 return NotFound("Exam is not found");
-                      
-            return Ok (submission);
+
+            return Ok(new { submission, quest });
         }
     }
 }

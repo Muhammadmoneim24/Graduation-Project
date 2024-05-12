@@ -885,7 +885,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "submission",
+        "Name": "submissionModel",
         "Type": "login_and_register.Dtos.SubmissionModel",
         "IsRequired": true
       }

@@ -526,6 +526,33 @@ namespace login_and_register.Migrations
                     b.ToTable("Questions", (string)null);
                 });
 
+            modelBuilder.Entity("login_and_register.Models.QuestionsSubs", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentAnswer")
+                        .HasMaxLength(1000)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<int>("SubmissionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("SubmissionId");
+
+                    b.ToTable("QuestionsSubs", (string)null);
+                });
+
             modelBuilder.Entity("login_and_register.Models.Submission", b =>
                 {
                     b.Property<int>("Id")
@@ -544,20 +571,12 @@ namespace login_and_register.Migrations
                     b.Property<int>("Grade")
                         .HasColumnType("INT");
 
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StudentAnswer")
-                        .HasMaxLength(500)
-                        .HasColumnType("VARCHAR");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique();
 
                     b.HasIndex("ExamId");
-
-                    b.HasIndex("QuestionId");
 
                     b.ToTable("Submissions", (string)null);
                 });
@@ -793,6 +812,25 @@ namespace login_and_register.Migrations
                     b.Navigation("Exam");
                 });
 
+            modelBuilder.Entity("login_and_register.Models.QuestionsSubs", b =>
+                {
+                    b.HasOne("login_and_register.Models.Question", "Question")
+                        .WithMany("QuestionsSubs")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("login_and_register.Models.Submission", "Submission")
+                        .WithMany("QuestionsSubs")
+                        .HasForeignKey("SubmissionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+
+                    b.Navigation("Submission");
+                });
+
             modelBuilder.Entity("login_and_register.Models.Submission", b =>
                 {
                     b.HasOne("login_and_register.Models.ApplicationUser", "ApplicationUser")
@@ -807,17 +845,9 @@ namespace login_and_register.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("login_and_register.Models.Question", "Question")
-                        .WithOne("Submission")
-                        .HasForeignKey("login_and_register.Models.Submission", "QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Exam");
-
-                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("login_and_register.Models.SubmissionAssignment", b =>
@@ -935,7 +965,12 @@ namespace login_and_register.Migrations
 
             modelBuilder.Entity("login_and_register.Models.Question", b =>
                 {
-                    b.Navigation("Submission");
+                    b.Navigation("QuestionsSubs");
+                });
+
+            modelBuilder.Entity("login_and_register.Models.Submission", b =>
+                {
+                    b.Navigation("QuestionsSubs");
                 });
 #pragma warning restore 612, 618
         }
