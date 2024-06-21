@@ -16,10 +16,10 @@ namespace login_and_register.Models
 
         public string Type { get; set; }
         public string Text { get; set; }
-        public string Options { get; set; }
-        public string CorrectAnswer { get; set; }
+        public string? Options { get; set; } = string.Empty;
+        public string? CorrectAnswer { get; set; }  = string.Empty;
         public int Points { get; set; }
-        public string? Explanation { get; set; }
+        public string? Explanation { get; set; } = string.Empty;
 
         public virtual Exam Exam { get; set; } 
 

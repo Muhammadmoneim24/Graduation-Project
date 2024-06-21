@@ -20,9 +20,11 @@ namespace login_and_register.Configurations
             builder.Property(d => d.Tittle).HasColumnType("VARCHAR").HasMaxLength(255).IsRequired(false);
             builder.Property(d => d.Content).HasColumnType("VARCHAR").HasMaxLength(1000).IsRequired(false);
 
-            builder.HasOne(d => d.ApplicationUser).WithOne(c => c.Discussion).HasForeignKey<Discussion>(d => d.ApplicationUserId).IsRequired(false);
-            builder.HasOne(d =>d.Course).WithOne(c => c.Discussion).HasForeignKey<Discussion>(d => d.CourseId).IsRequired(false);
+            builder.HasOne(d => d.ApplicationUser).WithMany(c => c.Discussions).HasForeignKey(d => d.ApplicationUserId).IsRequired(false);
+            builder.HasOne(d => d.Course).WithMany(c => c.Discussions).HasForeignKey(d => d.CourseId).IsRequired(false);
             builder.HasMany(d => d.Comments).WithOne(c => c.Discussion).HasForeignKey(d => d.DiscussionId).IsRequired(false);
+
+
 
 
             builder.ToTable("Discussions");

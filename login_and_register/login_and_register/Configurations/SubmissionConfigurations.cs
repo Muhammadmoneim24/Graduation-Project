@@ -21,8 +21,8 @@ namespace login_and_register.Configurations
             builder.Property(s => s.Grade).HasColumnType("INT");
 
 
-            builder.HasOne(s => s.ApplicationUser).WithOne(s => s.Submission).HasForeignKey<Submission>(s => s.ApplicationUserId);
-            builder.HasOne(s => s.Exam).WithOne(s => s.Submission).HasForeignKey<Submission>(s => s.ExamId);
+            builder.HasOne(s => s.ApplicationUser).WithMany(s => s.Submissions).HasForeignKey(s => s.ApplicationUserId);
+            builder.HasOne(s => s.Exam).WithMany(s => s.Submissions).HasForeignKey(s => s.ExamId).OnDelete(DeleteBehavior.Cascade);
 
 
             builder.HasIndex(s => s.ExamId).IsUnique(false);

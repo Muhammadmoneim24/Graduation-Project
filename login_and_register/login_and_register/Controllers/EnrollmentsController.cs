@@ -28,6 +28,9 @@ namespace login_and_register.Controllers
             if (course is null || std is null)
                 return BadRequest("User or course not found");
 
+            if(await _context.UserCourses.Where(e => e.CourseId == enrollment.CourseId).AnyAsync(e => e.ApplicationUserId == std.Id))
+                return BadRequest("User has already enrolled in this course");
+
 
             var enroll = new UserCourse {
 

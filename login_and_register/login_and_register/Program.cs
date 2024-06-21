@@ -1,4 +1,3 @@
-
 using login_and_register.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using login_and_register.Helpers;
@@ -29,7 +28,7 @@ namespace login_and_register
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
 
-            
+
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
@@ -43,9 +42,9 @@ namespace login_and_register
 
             builder.Services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-                 
+
                 );
-            builder.Services.AddScoped<IAuthService,AuthService>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -72,8 +71,8 @@ namespace login_and_register
             // Configure the HTTP request pipeline.
             //if (app.Environment.IsDevelopment())
             //{
-                app.UseSwagger();
-                app.UseSwaggerUI();
+            app.UseSwagger();
+            app.UseSwaggerUI();
             //}
 
 

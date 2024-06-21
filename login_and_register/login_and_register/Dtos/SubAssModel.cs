@@ -8,7 +8,6 @@
 
         public IFormFile? File { get; set; }
 
-        public int Grade { get; set; }
 
     }
 }

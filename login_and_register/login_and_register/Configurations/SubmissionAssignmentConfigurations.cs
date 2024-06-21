@@ -12,8 +12,8 @@ namespace login_and_register.Configurations
             builder.Property(a => a.Id).ValueGeneratedOnAdd();
 
             builder.Property(s => s.Grade).HasColumnType("INT");
-            builder.HasOne(a => a.ApplicationUser).WithOne(a => a.SubmissionAssignment).HasForeignKey<SubmissionAssignment>(a => a.ApplicationUserId);
-            builder.HasOne(s => s.Assignment).WithOne(s => s.SubmissionAssignment).HasForeignKey<SubmissionAssignment>(s => s.AssignmentId);
+            builder.HasOne(a => a.ApplicationUser).WithMany(a => a.SubmissionAssignments).HasForeignKey(a => a.ApplicationUserId);
+            builder.HasOne(s => s.Assignment).WithMany(s => s.SubmissionAssignments).HasForeignKey(s => s.AssignmentId);
 
 
         }

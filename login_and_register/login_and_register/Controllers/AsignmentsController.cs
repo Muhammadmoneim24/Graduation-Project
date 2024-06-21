@@ -18,7 +18,7 @@ namespace login_and_register.Controllers
             _context = context;
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("CreateAssignment{id}")]
         public async Task<IActionResult> CreateAssignment(int id, [FromForm]AssignmentModel assignment) 
         {
             if (!_allowedExtensions.Contains(Path.GetExtension(assignment.File.FileName).ToLower()))
@@ -46,6 +46,8 @@ namespace login_and_register.Controllers
             return Ok(assign);
         }
 
+       
+
         [HttpGet("GetCourseAssignments{id}")]
         public async Task<IActionResult> GetCourseLectures(int id)
         {
@@ -61,7 +63,7 @@ namespace login_and_register.Controllers
             return Ok(assignments);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetAssignment{id}")]
         public async Task<IActionResult> GetAssignment(int id)
         {
             if (!await _context.Assignments.AnyAsync(x => x.Id == id))

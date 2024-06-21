@@ -28,7 +28,8 @@ namespace login_and_register.Models
         public string? Date { get; set; }
         public Course Course { get; set; }
 
-        public virtual Submission? Submission { get; set; }
+        public ICollection<Submission> Submissions { get; set; }
+
 
         public ICollection<Question> Questions { get; set; } = new List<Question>();
    

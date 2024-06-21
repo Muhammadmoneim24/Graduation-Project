@@ -40,7 +40,7 @@ namespace login_and_register.Controllers
             {
                 ApplicationUserId = user.Id,
                 AssignmentId = submission.AssignmentId,
-                Grade = submission.Grade,
+                Grade = 0,
                 File = submission.File is null? null: datastream.ToArray(),
             };
 
@@ -51,11 +51,43 @@ namespace login_and_register.Controllers
         }
 
 
-        [HttpGet("GetAssignmentSubmission/{id}")]
-        public async Task<IActionResult> GetAssignmentSubmission(int id)
+        [HttpPut("AdddAssignmentGrade")]
+        public async Task<IActionResult> AdddAssignmentGrade([FromForm] StudentAssModel submission)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(e => e.Email == submission.UserEmail);
+            var assign = await _context.SubmissionAssignments.FindAsync(submission.AssignmentId);
+            if (user == null)
+                return NotFound("User is not found");
+
+            if (submission == null || !ModelState.IsValid || user is null)
+                return NotFound("Model is not found");
+
+            assign.Grade = submission.Grade;
+
+            _context.SaveChanges();
+
+            return Ok(assign);
+        }
+
+        [HttpGet("GetSubmission{Subid}")]
+        public async Task<IActionResult> GetSubmission(int Subid)
         {
 
-            var SubmissionA = await _context.SubmissionAssignments.FindAsync(id);
+            var SubmissionA = await _context.SubmissionAssignments.FindAsync(Subid);
+
+            if (SubmissionA == null)
+                return NotFound("Submission is not found");
+
+            return Ok(SubmissionA);
+
+        }
+
+
+        [HttpGet("GetAssignmentSubmissions{Assignmentid}")]
+        public async Task<IActionResult> GetAssignmentSubmissions(int Assignmentid)
+        {
+
+            var SubmissionA = await _context.SubmissionAssignments.Where(e=>e.AssignmentId == Assignmentid).ToListAsync();
 
             if (SubmissionA == null)
                 return NotFound("Submission is not found");

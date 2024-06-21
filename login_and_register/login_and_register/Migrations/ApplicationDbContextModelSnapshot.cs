@@ -377,12 +377,9 @@ namespace login_and_register.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId")
-                        .IsUnique()
-                        .HasFilter("[ApplicationUserId] IS NOT NULL");
+                    b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("CourseId")
-                        .IsUnique();
+                    b.HasIndex("CourseId");
 
                     b.ToTable("Discussions", (string)null);
                 });
@@ -573,8 +570,7 @@ namespace login_and_register.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId")
-                        .IsUnique();
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("ExamId");
 
@@ -604,11 +600,9 @@ namespace login_and_register.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId")
-                        .IsUnique();
+                    b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("AssignmentId")
-                        .IsUnique();
+                    b.HasIndex("AssignmentId");
 
                     b.ToTable("SubmissionAssignments");
                 });
@@ -767,12 +761,12 @@ namespace login_and_register.Migrations
             modelBuilder.Entity("login_and_register.Models.Discussion", b =>
                 {
                     b.HasOne("login_and_register.Models.ApplicationUser", "ApplicationUser")
-                        .WithOne("Discussion")
-                        .HasForeignKey("login_and_register.Models.Discussion", "ApplicationUserId");
+                        .WithMany("Discussions")
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("login_and_register.Models.Course", "Course")
-                        .WithOne("Discussion")
-                        .HasForeignKey("login_and_register.Models.Discussion", "CourseId");
+                        .WithMany("Discussions")
+                        .HasForeignKey("CourseId");
 
                     b.Navigation("ApplicationUser");
 
@@ -817,7 +811,7 @@ namespace login_and_register.Migrations
                     b.HasOne("login_and_register.Models.Question", "Question")
                         .WithMany("QuestionsSubs")
                         .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("login_and_register.Models.Submission", "Submission")
@@ -834,14 +828,14 @@ namespace login_and_register.Migrations
             modelBuilder.Entity("login_and_register.Models.Submission", b =>
                 {
                     b.HasOne("login_and_register.Models.ApplicationUser", "ApplicationUser")
-                        .WithOne("Submission")
-                        .HasForeignKey("login_and_register.Models.Submission", "ApplicationUserId")
+                        .WithMany("Submissions")
+                        .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("login_and_register.Models.Exam", "Exam")
-                        .WithOne("Submission")
-                        .HasForeignKey("login_and_register.Models.Submission", "ExamId")
+                        .WithMany("Submissions")
+                        .HasForeignKey("ExamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -853,14 +847,14 @@ namespace login_and_register.Migrations
             modelBuilder.Entity("login_and_register.Models.SubmissionAssignment", b =>
                 {
                     b.HasOne("login_and_register.Models.ApplicationUser", "ApplicationUser")
-                        .WithOne("SubmissionAssignment")
-                        .HasForeignKey("login_and_register.Models.SubmissionAssignment", "ApplicationUserId")
+                        .WithMany("SubmissionAssignments")
+                        .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("login_and_register.Models.Assignment", "Assignment")
-                        .WithOne("SubmissionAssignment")
-                        .HasForeignKey("login_and_register.Models.SubmissionAssignment", "AssignmentId")
+                        .WithMany("SubmissionAssignments")
+                        .HasForeignKey("AssignmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -911,12 +905,11 @@ namespace login_and_register.Migrations
                 {
                     b.Navigation("Comments");
 
-                    b.Navigation("Discussion")
-                        .IsRequired();
+                    b.Navigation("Discussions");
 
-                    b.Navigation("Submission");
+                    b.Navigation("SubmissionAssignments");
 
-                    b.Navigation("SubmissionAssignment");
+                    b.Navigation("Submissions");
 
                     b.Navigation("UserCourses");
 
@@ -925,7 +918,7 @@ namespace login_and_register.Migrations
 
             modelBuilder.Entity("login_and_register.Models.Assignment", b =>
                 {
-                    b.Navigation("SubmissionAssignment");
+                    b.Navigation("SubmissionAssignments");
                 });
 
             modelBuilder.Entity("login_and_register.Models.Course", b =>
@@ -934,8 +927,7 @@ namespace login_and_register.Migrations
 
                     b.Navigation("CourseNotifications");
 
-                    b.Navigation("Discussion")
-                        .IsRequired();
+                    b.Navigation("Discussions");
 
                     b.Navigation("Exams");
 
@@ -953,7 +945,7 @@ namespace login_and_register.Migrations
                 {
                     b.Navigation("Questions");
 
-                    b.Navigation("Submission");
+                    b.Navigation("Submissions");
                 });
 
             modelBuilder.Entity("login_and_register.Models.Notification", b =>

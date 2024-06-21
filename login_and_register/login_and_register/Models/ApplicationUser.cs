@@ -13,10 +13,13 @@ namespace login_and_register.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public virtual Submission? Submission { get; set; }
-        public SubmissionAssignment?  SubmissionAssignment { get; set; }
 
-        public Discussion Discussion { get; set; }
+        public ICollection<SubmissionAssignment> SubmissionAssignments { get; set; }
+
+        public ICollection <Discussion> Discussions { get; set; }
+
+        public ICollection<Submission> Submissions { get; set; }
+
 
         public ICollection<UserCourse> UserCourses { get; set; }
         public ICollection<UserNotification> UserNotifications { get; set; }

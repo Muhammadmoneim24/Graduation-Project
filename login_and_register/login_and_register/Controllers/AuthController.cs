@@ -4,6 +4,7 @@ using login_and_register.Sevices;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace login_and_register.Controllers
 {
@@ -64,5 +65,35 @@ namespace login_and_register.Controllers
 
         //    return Ok(model);
         //}
+
+        [HttpPost("auto-login")]
+        public async Task<IActionResult> AutoLogin()
+        {
+            var authHeader = Request.Headers["Authorization"].FirstOrDefault();
+            if (authHeader != null && authHeader.StartsWith("Bearer "))
+            {
+                var token = authHeader.Substring("Bearer ".Length);
+                var handler = new JwtSecurityTokenHandler();
+                var jwtSecurityToken = handler.ReadJwtToken(token);
+
+                if (jwtSecurityToken != null)
+                {
+                    var emailClaim = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Email);
+                    if (emailClaim != null)
+                    {
+                        var user = await _context.Users.Include(e => e.UserCourses).FirstOrDefaultAsync(u => u.Email == emailClaim.Value);
+                        if (user != null)
+                        {
+                            
+                            var userdata = new { user.Email, user.UserName, user.UserCourses };
+                            return Ok(userdata);
+                        }
+                    }
+                }
+            }
+
+            return Unauthorized();
+        }
+
     }
 }

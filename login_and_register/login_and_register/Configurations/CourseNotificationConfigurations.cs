@@ -16,6 +16,7 @@ namespace login_and_register.Configurations
         {
             builder.HasKey(x => x.Id);
             builder.Property(x=>x.Id).ValueGeneratedOnAdd();
+
             builder.Property(x=>x.Content).HasColumnType("VARCHAR").HasMaxLength(255).IsRequired();
 
             builder.HasOne(x => x.Course).WithMany(x=>x.CourseNotifications).HasForeignKey(x=>x.CourseId).IsRequired();

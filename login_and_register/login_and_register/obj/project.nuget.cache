@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "y4Y3ED+Ivnf0Z4JE+E47bbDGdz1oKO7hypRLYcOMzucvkMKcwOw5Z6M6RoSQ3f+gHTNPYcMti4Klkg50V9hB7g==",
+  "dgSpecHash": "AI7w6wpn4K5CqhwpZS+9249iamQ4Fsaer2THsY9fYClk62CiiW6h8OryrmIZ4IDx3VNHXWMK3YXkS+rA6BPXrA==",
   "success": true,
   "projectFilePath": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\login_and_register.csproj",
   "expectedPackageFiles": [
@@ -244,7 +244,11 @@
     "C:\\Users\\lap shop\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\lap shop\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\lap shop\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\lap shop\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\lap shop\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\lap shop\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.19\\microsoft.windowsdesktop.app.ref.7.0.19.nupkg.sha512",
+    "C:\\Users\\lap shop\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.19\\microsoft.netcore.app.ref.7.0.19.nupkg.sha512",
+    "C:\\Users\\lap shop\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.19\\microsoft.aspnetcore.app.ref.7.0.19.nupkg.sha512",
+    "C:\\Users\\lap shop\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.19\\microsoft.netcore.app.host.win-x64.7.0.19.nupkg.sha512"
   ],
   "logs": [
     {

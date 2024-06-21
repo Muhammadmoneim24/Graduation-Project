@@ -23,7 +23,7 @@ namespace login_and_register.Controllers
         {
             var user = await _context.Users.FirstOrDefaultAsync(e => e.Email == discussion.UserEmail);
 
-            if (discussion == null || !ModelState.IsValid )
+            if (discussion == null || !ModelState.IsValid)
                 return NotFound("Model is not found");
 
             var datastream = new MemoryStream();
@@ -33,19 +33,21 @@ namespace login_and_register.Controllers
                     return BadRequest("File extension is not allowed");
                 await discussion.File.CopyToAsync(datastream);
             }
+
             var disc = new Discussion
             {
-                CourseId = id,
+                CourseId = id, // Set the CourseId explicitly from the route parameter
                 Tittle = discussion.Tittle,
-                Content = discussion.Content ,
-                File = discussion.File is null? null:datastream.ToArray(),
+                Content = discussion.Content,
+                File = discussion.File is null ? null : datastream.ToArray(),
             };
 
             await _context.Discussions.AddAsync(disc);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok(disc);
         }
+
         [HttpGet("GetCoursePosts{id}")]
         public async Task<IActionResult> GetCourseLectures(int id)
         {

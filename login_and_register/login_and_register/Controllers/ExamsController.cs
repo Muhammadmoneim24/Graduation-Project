@@ -79,40 +79,54 @@ namespace login_and_register.Controllers
                     e.ExamId,
                     e.Type,
                     e.Text,
-                    Options = e.Options.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList() ,
-                    CorrectAnswer = e.CorrectAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries)
-                            
-                             .ToArray(),
+                    Options = e.Options != null ? e.Options.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList() : new List<string>(),
+                    CorrectAnswer = e.CorrectAnswer != null ? e.CorrectAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToArray() : new string[] { },
                     e.Points,
                     e.Explanation
                 })
                 .ToListAsync();
 
-            var examWithCorrectAnswers = Questions.Select(q => new {
-                q.Id,
-                q.ExamId,
-                q.Type,
-                q.Text,
-                q.Options,
-                CorrectAnswer = q.CorrectAnswer
-                .OrderByDescending(o => int.Parse(o))
-                .ToArray(),
-                q.Points,
-                q.Explanation
-            }).ToList();
+            //var examWithCorrectAnswers = Questions.Select(q => new {
+            //    q.Id,
+            //    q.ExamId,
+            //    q.Type,
+            //    q.Text,
+            //    q.Options,
+            //    CorrectAnswer = q.CorrectAnswer
+            //    .OrderByDescending(o => int.Parse(o))
+            //    .ToArray(),
+            //    q.Points,
+            //    q.Explanation
+            //}).ToList();
 
 
 
             return Ok(new { exam, Questions } );
         }
 
-        [HttpGet("GetExamQuestions{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetExamQuestions(int id)
         {
             if (!await _context.Exams.AnyAsync(c => c.Id == id))
                 return BadRequest("Id is not valid");
 
-            var questions = await _context.Questions.Where(e => e.ExamId == id).ToListAsync();
+            var separator = new char[] { '/' };
+
+            var questions = await _context.Questions
+                .Where(e => e.ExamId == id)
+                .Select(e => new {
+                    e.Id,
+                    e.ExamId,
+                    e.Type,
+                    e.Text,
+                    Options = e.Options.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList(),
+                    CorrectAnswer = e.CorrectAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries)
+
+                             .ToArray(),
+                    e.Points,
+                    e.Explanation
+                })
+                .ToListAsync();
 
 
             if (questions == null)
@@ -136,7 +150,7 @@ namespace login_and_register.Controllers
             return Ok(exams);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateExam(int id, [FromBody] ExamModel model)
         {
             if (!ModelState.IsValid)
@@ -150,6 +164,7 @@ namespace login_and_register.Controllers
             exam.Tittle = model.Tittle;
             exam.Describtion = model.Describtion; 
             exam.Instructions = model.Instructions;
+            exam.Grades = model.Grades;
 
             _context.SaveChanges();
 
@@ -160,16 +175,14 @@ namespace login_and_register.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteExam( int id)
         {
-            if (!await _context.Exams.AnyAsync(e => e.Id == id))
-                return NotFound("The Id is not found");
-
+           
             var exam = await _context.Exams.FindAsync(id);
 
             if (exam == null)
                 return NotFound("Exam is not found");
 
              _context.Exams.Remove(exam);
-             _context.SaveChanges();
+             await _context.SaveChangesAsync();
 
             return Ok(exam);
 
