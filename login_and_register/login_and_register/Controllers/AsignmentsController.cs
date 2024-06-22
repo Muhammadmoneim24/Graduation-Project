@@ -77,6 +77,19 @@ namespace login_and_register.Controllers
             return Ok(assign);
         }
 
+        [HttpGet("GetAllAssignments")]
+        public async Task<IActionResult> GetAllAssignments()
+        {
+            
+
+            var assigns = await _context.Assignments.ToListAsync();
+
+            if (assigns == null)
+                return NotFound("No Assignments");
+
+            return Ok(assigns);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAssignment(int id, [FromForm] AssignmentModel assignment)
         {

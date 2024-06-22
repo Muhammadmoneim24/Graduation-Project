@@ -267,6 +267,42 @@ namespace login_and_register.Migrations
                     b.ToTable("Assignments", (string)null);
                 });
 
+            modelBuilder.Entity("login_and_register.Models.ChatMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("File")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiverId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("ChatMessages", (string)null);
+                });
+
             modelBuilder.Entity("login_and_register.Models.Comment", b =>
                 {
                     b.Property<int>("Id")
@@ -531,6 +567,9 @@ namespace login_and_register.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AnswerPoints")
+                        .HasColumnType("int");
+
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
@@ -631,6 +670,21 @@ namespace login_and_register.Migrations
                     b.ToTable("UserCourses", (string)null);
                 });
 
+            modelBuilder.Entity("login_and_register.Models.UserFriend", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FriendId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "FriendId");
+
+                    b.HasIndex("FriendId");
+
+                    b.ToTable("UserFriends");
+                });
+
             modelBuilder.Entity("login_and_register.Models.UserNotification", b =>
                 {
                     b.Property<int>("Id")
@@ -720,6 +774,25 @@ namespace login_and_register.Migrations
                         .IsRequired();
 
                     b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("login_and_register.Models.ChatMessage", b =>
+                {
+                    b.HasOne("login_and_register.Models.ApplicationUser", "Receiver")
+                        .WithMany("ReceivedMessages")
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("login_and_register.Models.ApplicationUser", "Sender")
+                        .WithMany("SentMessages")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("login_and_register.Models.Comment", b =>
@@ -882,6 +955,25 @@ namespace login_and_register.Migrations
                     b.Navigation("Course");
                 });
 
+            modelBuilder.Entity("login_and_register.Models.UserFriend", b =>
+                {
+                    b.HasOne("login_and_register.Models.ApplicationUser", "Friend")
+                        .WithMany("FriendOf")
+                        .HasForeignKey("FriendId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("login_and_register.Models.ApplicationUser", "User")
+                        .WithMany("Friends")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Friend");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("login_and_register.Models.UserNotification", b =>
                 {
                     b.HasOne("login_and_register.Models.ApplicationUser", "ApplicationUser")
@@ -906,6 +998,14 @@ namespace login_and_register.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Discussions");
+
+                    b.Navigation("FriendOf");
+
+                    b.Navigation("Friends");
+
+                    b.Navigation("ReceivedMessages");
+
+                    b.Navigation("SentMessages");
 
                     b.Navigation("SubmissionAssignments");
 

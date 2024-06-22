@@ -1,17 +1,17 @@
-using login_and_register.Controllers;
-using Microsoft.AspNetCore.Mvc;
 using login_and_register.Helpers;
 using login_and_register.Models;
-using login_and_register.Sevices;
+using login_and_register.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Net.Http;
+using Microsoft.OpenApi.Models;
 using System.Text;
-using System.Text.Json.Serialization;
+using login_and_register.Sevices;
+using Microsoft.AspNetCore.Authorization;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace login_and_register
 {
@@ -22,35 +22,51 @@ namespace login_and_register
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddCors();
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Academix APIs", Version = "v1" });
 
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme"
+                });
 
-            builder.Services.AddSwaggerGen();
+                c.OperationFilter<AddReqHeaderParameter>();
+            });
 
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                options.SerializerSettings.ContractResolver = new IgnoreDollarSignPropertiesResolver();
+                options.SerializerSettings.ContractResolver = new IgnoreResolver();
             });
 
             builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
-            builder.Services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-                );
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddSignalR();
+            builder.Services.AddScoped<INotificationService, NotificationService>();
+
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
-            }).AddJwtBearer(o =>
+            })
+            .AddJwtBearer(o =>
             {
                 o.RequireHttpsMetadata = false;
                 o.SaveToken = false;
@@ -68,29 +84,32 @@ namespace login_and_register
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            //if (app.Environment.IsDevelopment())
-            //{
             app.UseSwagger();
-            app.UseSwaggerUI();
-            //}
-
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Academix APIs V1");
+            });
 
             app.UseHttpsRedirection();
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
+            app.UseRouting();
 
             app.UseAuthentication();
-
             app.UseAuthorization();
 
-            app.MapControllers();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<NotificationHub>("/notificationHub");
+                endpoints.MapHub<ChatHub>("/chatHub");
+            });
 
             app.Run();
         }
     }
 
-    public class IgnoreDollarSignPropertiesResolver : Newtonsoft.Json.Serialization.DefaultContractResolver
+    public class IgnoreResolver : DefaultContractResolver
     {
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {
@@ -98,4 +117,34 @@ namespace login_and_register
             return properties.Where(p => !p.PropertyName.Contains("$id")).ToList();
         }
     }
+
+    public class AddReqHeaderParameter : IOperationFilter
+    {
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
+        {
+            var hasAuthorize = context.MethodInfo.DeclaringType.GetCustomAttributes(true)
+                .Union(context.MethodInfo.GetCustomAttributes(true))
+                .OfType<AuthorizeAttribute>()
+                .Any();
+
+            if (hasAuthorize)
+            {
+                operation.Security = new List<OpenApiSecurityRequirement>
+                {
+                    new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+                            },
+                            new string[] {}
+                        }
+                    }
+                };
+            }
+        }
+    }
 }
+
+

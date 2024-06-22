@@ -24,9 +24,12 @@ namespace login_and_register.Models
         public DbSet<SubmissionAssignment> SubmissionAssignments { get; set; }
         public DbSet<QuestionsSubs> QuestionsSubs { get; set; }
 
-
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<UserFriend> UserFriends { get; set; }
+
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

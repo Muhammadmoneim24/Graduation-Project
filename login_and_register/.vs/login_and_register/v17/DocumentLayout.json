@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "E:\\4th CSE\\Grad project\\login_and_register\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\controllers\\submissionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\submissionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\controllers\\chattuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\chattuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\dtos\\subassmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\dtos\\subassmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\dtos\\addfriendmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\dtos\\addfriendmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\models\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\models\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\configurations\\submissionassignmentconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\configurations\\submissionassignmentconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\dtos\\commentmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\dtos\\commentmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\controllers\\submissionassignmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\submissionassignmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +26,59 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SubmissionsController.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\SubmissionsController.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Controllers\\SubmissionsController.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\SubmissionsController.cs",
-              "RelativeToolTip": "login_and_register\\Controllers\\SubmissionsController.cs",
-              "ViewState": "AQIAACcAAAAAAAAAAAAYwC0AAAAgAAAA",
+              "DocumentIndex": 1,
+              "Title": "AddFriendModel.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\AddFriendModel.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Dtos\\AddFriendModel.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\AddFriendModel.cs",
+              "RelativeToolTip": "login_and_register\\Dtos\\AddFriendModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-21T11:56:25.709Z",
+              "WhenOpened": "2024-06-22T12:31:45.96Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SubAssModel.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\SubAssModel.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Dtos\\SubAssModel.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\SubAssModel.cs",
-              "RelativeToolTip": "login_and_register\\Dtos\\SubAssModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "ChattUsersController.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\ChattUsersController.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Controllers\\ChattUsersController.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\ChattUsersController.cs",
+              "RelativeToolTip": "login_and_register\\Controllers\\ChattUsersController.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAADwvx0AAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-21T04:53:23.324Z",
+              "WhenOpened": "2024-06-22T12:27:52.214Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Question.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Models\\Question.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Models\\Question.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Models\\Question.cs",
-              "RelativeToolTip": "login_and_register\\Models\\Question.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAAA4AAAAnAAAA",
+              "Title": "SubmissionAssignmentConfigurations.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Configurations\\SubmissionAssignmentConfigurations.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Configurations\\SubmissionAssignmentConfigurations.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Configurations\\SubmissionAssignmentConfigurations.cs",
+              "RelativeToolTip": "login_and_register\\Configurations\\SubmissionAssignmentConfigurations.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T08:59:30.781Z",
+              "WhenOpened": "2024-06-22T11:18:58.308Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "CommentModel.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\CommentModel.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Dtos\\CommentModel.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\CommentModel.cs",
-              "RelativeToolTip": "login_and_register\\Dtos\\CommentModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Title": "SubmissionAssignmentController.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\SubmissionAssignmentController.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Controllers\\SubmissionAssignmentController.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\SubmissionAssignmentController.cs",
+              "RelativeToolTip": "login_and_register\\Controllers\\SubmissionAssignmentController.cs",
+              "ViewState": "AQIAAFAAAAAAAAAAAAAYwFYAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T00:07:37.459Z"
+              "WhenOpened": "2024-06-22T11:18:07.861Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -13,6 +13,7 @@ namespace login_and_register.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        
 
         public ICollection<SubmissionAssignment> SubmissionAssignments { get; set; }
 
@@ -24,8 +25,10 @@ namespace login_and_register.Models
         public ICollection<UserCourse> UserCourses { get; set; }
         public ICollection<UserNotification> UserNotifications { get; set; }
         public ICollection<Comment> Comments { get; set; }
-
-
+        public virtual ICollection<ChatMessage> SentMessages { get; set; }
+        public virtual ICollection<ChatMessage> ReceivedMessages { get; set; }
+        public virtual ICollection<UserFriend> Friends { get; set; }
+        public virtual ICollection<UserFriend> FriendOf { get; set; }
 
 
     }

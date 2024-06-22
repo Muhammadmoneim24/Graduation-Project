@@ -1,5 +1,6 @@
 ﻿using login_and_register.Dtos;
 using login_and_register.Models;
+using login_and_register.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +12,13 @@ namespace login_and_register.Controllers
     public class DiscussionsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly INotificationService _notificationService;
         private List<string> _allowedExtensions = new List<string> { ".pdf", ".doc", ".png", ".jpg" };
 
-        public DiscussionsController(ApplicationDbContext context)
+        public DiscussionsController(ApplicationDbContext context, INotificationService notificationService)
         {
             _context = context;
+            _notificationService = notificationService;
         }
 
         [HttpPost("{id}")]
@@ -33,21 +36,25 @@ namespace login_and_register.Controllers
                     return BadRequest("File extension is not allowed");
                 await discussion.File.CopyToAsync(datastream);
             }
-
             var disc = new Discussion
             {
-                CourseId = id, // Set the CourseId explicitly from the route parameter
+                CourseId = id,
                 Tittle = discussion.Tittle,
                 Content = discussion.Content,
                 File = discussion.File is null ? null : datastream.ToArray(),
             };
 
             await _context.Discussions.AddAsync(disc);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
+
+            var enrolls = await _context.UserCourses.Where(uc => uc.CourseId == id).ToListAsync();
+            foreach (var enroll in enrolls)
+            {
+                await _notificationService.SendNotificationAsync(enroll.ApplicationUserId, "New Discussion", $"A new discussion '{discussion.Tittle}' has been posted in course {id}.");
+            }
 
             return Ok(disc);
         }
-
         [HttpGet("GetCoursePosts{id}")]
         public async Task<IActionResult> GetCourseLectures(int id)
         {
@@ -100,7 +107,7 @@ namespace login_and_register.Controllers
 
             disc.Tittle = discussion.Tittle;
             disc.Content = discussion.Content;
-            
+
 
             _context.SaveChanges();
 

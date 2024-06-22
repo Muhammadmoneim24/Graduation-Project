@@ -18,21 +18,28 @@ namespace login_and_register.Controllers
         }
 
         [HttpPost("AddAssignmentSubmission")]
-        public async Task<IActionResult> AddSubmission([FromForm]SubAssModel submission)
+        public async Task<IActionResult> AddSubmission([FromForm] SubAssModel submission)
         {
             var user = await _context.Users.FirstOrDefaultAsync(e => e.Email == submission.UserEmail);
             if (user == null)
                 return NotFound("User is not found");
 
-            if (submission == null || !ModelState.IsValid || user is null)
-                return NotFound("Model is not found");
+            if (submission == null || !ModelState.IsValid)
+                return BadRequest("Invalid model");
+
+
+            if (await _context.SubmissionAssignments
+                .FirstOrDefaultAsync(sa => sa.ApplicationUserId == user.Id && sa.AssignmentId == submission.AssignmentId) != null)
+            {
+                return Conflict("A submission for this user and assignment already exists.");
+            }
 
             var datastream = new MemoryStream();
-
             if (submission.File != null)
             {
                 if (!_allowedExtensions.Contains(Path.GetExtension(submission.File.FileName).ToLower()))
-                    return BadRequest("File extension is not allowed");
+                    return Conflict("File extension is not allowed");
+
                 await submission.File.CopyToAsync(datastream);
             }
 
@@ -41,26 +48,28 @@ namespace login_and_register.Controllers
                 ApplicationUserId = user.Id,
                 AssignmentId = submission.AssignmentId,
                 Grade = 0,
-                File = submission.File is null? null: datastream.ToArray(),
+                File = submission.File == null ? null : datastream.ToArray(),
             };
 
             await _context.SubmissionAssignments.AddAsync(SubAss);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok(SubAss);
         }
-
 
         [HttpPut("AdddAssignmentGrade")]
         public async Task<IActionResult> AdddAssignmentGrade([FromForm] StudentAssModel submission)
         {
             var user = await _context.Users.FirstOrDefaultAsync(e => e.Email == submission.UserEmail);
-            var assign = await _context.SubmissionAssignments.FindAsync(submission.AssignmentId);
+            var assign = await _context.SubmissionAssignments.FirstOrDefaultAsync(sa => sa.AssignmentId == submission.AssignmentId && sa.ApplicationUserId == user.Id);
             if (user == null)
                 return NotFound("User is not found");
 
-            if (submission == null || !ModelState.IsValid || user is null)
+            if (submission == null || !ModelState.IsValid)
                 return NotFound("Model is not found");
+
+            if (assign == null)
+                return NotFound("Assignment submission is not found");
 
             assign.Grade = submission.Grade;
 
@@ -72,28 +81,23 @@ namespace login_and_register.Controllers
         [HttpGet("GetSubmission{Subid}")]
         public async Task<IActionResult> GetSubmission(int Subid)
         {
-
             var SubmissionA = await _context.SubmissionAssignments.FindAsync(Subid);
 
             if (SubmissionA == null)
                 return NotFound("Submission is not found");
 
             return Ok(SubmissionA);
-
         }
-
 
         [HttpGet("GetAssignmentSubmissions{Assignmentid}")]
         public async Task<IActionResult> GetAssignmentSubmissions(int Assignmentid)
         {
+            var SubmissionA = await _context.SubmissionAssignments.Where(e => e.AssignmentId == Assignmentid).ToListAsync();
 
-            var SubmissionA = await _context.SubmissionAssignments.Where(e=>e.AssignmentId == Assignmentid).ToListAsync();
-
-            if (SubmissionA == null)
+            if (SubmissionA == null || !SubmissionA.Any())
                 return NotFound("Submission is not found");
 
             return Ok(SubmissionA);
-
         }
     }
 }

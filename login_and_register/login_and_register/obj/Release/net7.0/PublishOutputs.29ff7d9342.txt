@@ -82,6 +82,7 @@ E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\System.Drawing.Common.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\System.Memory.Data.dll
+E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\System.Net.WebSockets.WebSocketProtocol.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\System.Reflection.MetadataLoadContext.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\System.Runtime.Caching.dll
 E:\4th CSE\Grad project\login_and_register\login_and_register\obj\Release\net7.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll

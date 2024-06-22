@@ -4,6 +4,7 @@ using Humanizer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using login_and_register.Services;
 
 namespace login_and_register.Controllers
 {
@@ -12,10 +13,13 @@ namespace login_and_register.Controllers
     public class LecturesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private  List<string> _allowedExtensions = new List<string> {".pdf",".doc", ".docx", ".png",".jpg" };
-        public LecturesController(ApplicationDbContext context)
+        private readonly INotificationService _notificationService;
+        private List<string> _allowedExtensions = new List<string> { ".pdf", ".doc", ".docx", ".png", ".jpg" };
+
+        public LecturesController(ApplicationDbContext context, INotificationService notificationService)
         {
             _context = context;
+            _notificationService = notificationService;
         }
 
         [HttpPost("{id}")]
@@ -33,20 +37,26 @@ namespace login_and_register.Controllers
             }
 
 
-                var lec = new Lecture
+            var lec = new Lecture
             {
                 CourseId = id,
                 Name = lecture.Name,
                 Description = lecture.Description,
                 Link = lecture.Link,
-                LecFile = lecture.File is null? null: datastream.ToArray(),
+                LecFile = lecture.File is null ? null : datastream.ToArray(),
 
             };
 
-    
+
 
             await _context.Lectures.AddAsync(lec);
             _context.SaveChanges();
+
+            var enrolls = await _context.UserCourses.Where(uc => uc.CourseId == id).ToListAsync();
+            foreach (var enroll in enrolls)
+            {
+                await _notificationService.SendNotificationAsync(enroll.ApplicationUserId, "New Lecture", $"A new lecture '{lecture.Name}' has been posted in course {id}.");
+            }
 
             return Ok(lec);
         }
@@ -114,7 +124,7 @@ namespace login_and_register.Controllers
                 if (!_allowedExtensions.Contains(Path.GetExtension(lecture.File.FileName).ToLower()))
                     return BadRequest("File extension is not allowed");
 
-               
+
                 using var dataStraem = new MemoryStream();
 
                 await lecture.File.CopyToAsync(dataStraem);

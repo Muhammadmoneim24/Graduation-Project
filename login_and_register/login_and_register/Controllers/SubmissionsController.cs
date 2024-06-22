@@ -62,6 +62,8 @@ namespace login_and_register.Controllers
                 if (string.IsNullOrEmpty(question.CorrectAnswer))
                 {
                     allQuestionsHaveCorrectAnswers = false;
+                    questionSubmission.AnswerPoints = 0;
+                    _context.QuestionsSubs.Update(questionSubmission);
                 }
                 else
                 {
@@ -70,8 +72,15 @@ namespace login_and_register.Controllers
 
                     if (correctAnswers.Count == studentAnswers.Count && !correctAnswers.Except(studentAnswers).Any())
                     {
+                        questionSubmission.AnswerPoints = question.Points;
                         totalGrade += question.Points;
                     }
+                    else
+                    {
+                        questionSubmission.AnswerPoints = 0;
+                    }
+
+                    _context.QuestionsSubs.Update(questionSubmission);
                 }
 
                 submissionModel.Grade = totalGrade;
@@ -82,16 +91,65 @@ namespace login_and_register.Controllers
                 return Ok("Submission saved, wait for result.");
             }
 
+
             sub.Grade = totalGrade;
             _context.Submissions.Update(sub);
             await _context.SaveChangesAsync();
 
             return Ok(submissionModel);
+
+
         }
 
 
 
+        [HttpPut("manual-correction")]
+        public async Task<IActionResult> ManualCorrection(List<ManualModel> corrections)
+        {
+            if (corrections == null || !corrections.Any())
+            {
+                return BadRequest("No corrections provided");
+            }
 
+            int totalGrade = 0;
+            int? submissionId = null;
+
+            foreach (var correction in corrections)
+            {
+                var questionSubmission = await _context.QuestionsSubs.FirstOrDefaultAsync(qs => qs.Id == correction.QuestionsSubId);
+
+                if (questionSubmission == null)
+                {
+                    return NotFound($"Question submission with ID {correction.QuestionsSubId} not found");
+                }
+
+                questionSubmission.AnswerPoints = correction.AnswerPoints;
+                totalGrade += correction.AnswerPoints;
+
+                _context.QuestionsSubs.Update(questionSubmission);
+
+
+                submissionId = questionSubmission.SubmissionId;
+
+            }
+
+
+            var submission = await _context.Submissions.FirstOrDefaultAsync(s => s.Id == submissionId.Value);
+
+            if (submission == null)
+            {
+                return NotFound("Submission not found");
+            }
+
+            submission.Grade = totalGrade;
+            _context.Submissions.Update(submission);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Grade = totalGrade });
+
+
+
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSubmission(int id)
@@ -103,28 +161,6 @@ namespace login_and_register.Controllers
                 return NotFound("Exam is not found");
 
             return Ok(new { submission, quest });
-        }
-
-        [HttpPut("UpdateExamGrade")]
-        public async Task<IActionResult> UpdateExamGrade(int examid, [FromBody] UpdateexamgradeModel model)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest("Bad Request");
-
-            var exam = await _context.Exams.FindAsync(examid);
-            var student = await _context.Users.FindAsync(model.StudentId);
-            var sub = await _context.Submissions.Where(e=>e.ExamId == examid).FirstOrDefaultAsync(e=>e.ApplicationUserId == model.StudentId);
-
-
-            if (sub == null || exam == null)
-                return NotFound("Model is not found");
-
-            sub.Grade = model.Grade;
-
-            _context.SaveChanges();
-
-            return Ok(sub);
-
         }
     }
 }

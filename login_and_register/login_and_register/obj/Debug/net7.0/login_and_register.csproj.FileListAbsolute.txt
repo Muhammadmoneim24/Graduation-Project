@@ -793,3 +793,4 @@ C:\Users\lap shop\Desktop\login_and_register\login_and_register\obj\Debug\net7.0
 C:\Users\lap shop\Desktop\login_and_register\login_and_register\obj\Debug\net7.0\login_and_register.pdb
 C:\Users\lap shop\Desktop\login_and_register\login_and_register\obj\Debug\net7.0\login_and_register.genruntimeconfig.cache
 C:\Users\lap shop\Desktop\login_and_register\login_and_register\obj\Debug\net7.0\ref\login_and_register.dll
+E:\4th CSE\Grad project\login_and_register\login_and_register\bin\Debug\net7.0\System.Net.WebSockets.WebSocketProtocol.dll

@@ -8,7 +8,6 @@ namespace login_and_register.Models
 
         public int AssignmentId { get; set; }
         
-        [ForeignKey("ApplicationUser")]
         public string ApplicationUserId { get; set; }
 
         public byte[]? File { get; set; }
