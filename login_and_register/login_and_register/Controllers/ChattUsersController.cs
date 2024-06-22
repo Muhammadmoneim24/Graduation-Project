@@ -26,12 +26,15 @@ namespace login_and_register.Controllers
             var friend = await _context.Users.FindAsync(Friendmodel.FriendId);
             if (friend == null) return Conflict("Friend is not found");
 
-            if (user.Friends.Any(e => e.FriendId == Friendmodel.FriendId))
-                return Conflict("Friend is already exist");
+            if (await _context.UserFriends.AnyAsync(uf => uf.UserId == Friendmodel.UserId && uf.FriendId == Friendmodel.FriendId))
+                return Conflict("Friend is already added");
 
             var addfriend = new UserFriend { UserId = Friendmodel.UserId, FriendId = Friendmodel.FriendId };
 
-            return Ok($"Friend Added{AddFriend}");
+            await _context.UserFriends.AddAsync(addfriend);
+            await _context.SaveChangesAsync();
+
+            return Ok(friend);
 
 
         }

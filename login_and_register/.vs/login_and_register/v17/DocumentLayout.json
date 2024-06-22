@@ -7,15 +7,15 @@
       "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\chattuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\dtos\\addfriendmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\dtos\\addfriendmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\dtos\\addfriendmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\configurations\\submissionassignmentconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\configurations\\submissionassignmentconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\configurations\\submissionassignmentconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\controllers\\submissionassignmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\controllers\\submissionassignmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\submissionassignmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -49,7 +49,7 @@
               "RelativeDocumentMoniker": "login_and_register\\Controllers\\ChattUsersController.cs",
               "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\ChattUsersController.cs",
               "RelativeToolTip": "login_and_register\\Controllers\\ChattUsersController.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAADwvx0AAAA4AAAA",
+              "ViewState": "AQIAABoAAAAAAAAAAAAIwCQAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-22T12:27:52.214Z",
               "EditorCaption": ""
@@ -77,8 +77,7 @@
               "RelativeToolTip": "login_and_register\\Controllers\\SubmissionAssignmentController.cs",
               "ViewState": "AQIAAFAAAAAAAAAAAAAYwFYAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-22T11:18:07.861Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-22T11:18:07.861Z"
             }
           ]
         }
