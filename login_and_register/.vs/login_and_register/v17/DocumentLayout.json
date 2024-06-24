@@ -3,11 +3,19 @@
   "WorkspaceRootPath": "E:\\4th CSE\\Grad project\\login_and_register\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\controllers\\submissionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\controllers\\submissionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\submissionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\hub\\chatmessagehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\dtos\\manualmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\dtos\\manualmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\hub\\chatmessagehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\hub\\chatmessagehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -17,14 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\controllers\\chattuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\chattuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\dtos\\manualmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\dtos\\manualmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +38,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "ChattUsersController.cs",
               "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\ChattUsersController.cs",
               "RelativeDocumentMoniker": "login_and_register\\Controllers\\ChattUsersController.cs",
@@ -46,12 +46,11 @@
               "RelativeToolTip": "login_and_register\\Controllers\\ChattUsersController.cs",
               "ViewState": "AQIAAEgAAAAAAAAAAAAIwE0AAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-23T22:39:15.079Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-23T22:39:15.079Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "GroupController.cs",
               "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\GroupController.cs",
               "RelativeDocumentMoniker": "login_and_register\\Controllers\\GroupController.cs",
@@ -59,11 +58,12 @@
               "RelativeToolTip": "login_and_register\\Controllers\\GroupController.cs",
               "ViewState": "AQIAACcAAAAAAAAAAAAYwC8AAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-23T21:48:23.872Z"
+              "WhenOpened": "2024-06-23T21:48:23.872Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "ChatMessageHub.cs",
               "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Hub\\ChatMessageHub.cs",
               "RelativeDocumentMoniker": "login_and_register\\Hub\\ChatMessageHub.cs",
@@ -71,12 +71,11 @@
               "RelativeToolTip": "login_and_register\\Hub\\ChatMessageHub.cs",
               "ViewState": "AQIAABUAAAAAAAAAAAAAwCEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-23T11:12:23.276Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-23T11:12:23.276Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Program.cs",
               "RelativeDocumentMoniker": "login_and_register\\Program.cs",
@@ -88,15 +87,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "ManualModel.cs",
               "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\ManualModel.cs",
               "RelativeDocumentMoniker": "login_and_register\\Dtos\\ManualModel.cs",
               "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\ManualModel.cs",
               "RelativeToolTip": "login_and_register\\Dtos\\ManualModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAFAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-23T09:25:48.17Z"
+              "WhenOpened": "2024-06-23T09:25:48.17Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -104,9 +104,9 @@
               "Title": "SubmissionsController.cs",
               "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\SubmissionsController.cs",
               "RelativeDocumentMoniker": "login_and_register\\Controllers\\SubmissionsController.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\SubmissionsController.cs*",
-              "RelativeToolTip": "login_and_register\\Controllers\\SubmissionsController.cs*",
-              "ViewState": "AQIAAH0AAAAAAAAAAAD4v5IAAAAnAAAA",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\SubmissionsController.cs",
+              "RelativeToolTip": "login_and_register\\Controllers\\SubmissionsController.cs",
+              "ViewState": "AQIAAH0AAAAAAAAAAAD4v4gAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-23T09:14:43.391Z",
               "EditorCaption": ""

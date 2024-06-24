@@ -111,7 +111,6 @@ namespace login_and_register.Controllers
                 return BadRequest("No corrections provided");
             }
 
-            int totalGrade = 0;
             int? submissionId = null;
             
                 var questionSubmission = await _context.QuestionsSubs.Where(e=>e.QuestionId == correction.QuestionId).FirstOrDefaultAsync();
@@ -121,18 +120,7 @@ namespace login_and_register.Controllers
                     return NotFound($"Question submission with is not found");
                 }
 
-                questionSubmission.AnswerPoints = correction.AnswerPoints;
-                totalGrade += correction.AnswerPoints;
-
-                _context.QuestionsSubs.Update(questionSubmission);
-                await _context.SaveChangesAsync();
-
-            submissionId = questionSubmission.SubmissionId;
-
-            
-
-
-            var submission = await _context.Submissions
+                 var submission = await _context.Submissions
                 .Where(e=>e.ExamId==correction.ExamId && e.ApplicationUserId == correction.StudentId).FirstOrDefaultAsync();
 
             if (submission == null)
@@ -140,7 +128,20 @@ namespace login_and_register.Controllers
                 return NotFound("Submission not found");
             }
 
-            submission.Grade += totalGrade;
+                questionSubmission.AnswerPoints = correction.AnswerPoints;
+
+                _context.QuestionsSubs.Update(questionSubmission);
+                await _context.SaveChangesAsync();
+
+            var answerpoints = await _context.QuestionsSubs
+                .Where(e => e.SubmissionId == submission.Id).Select(e=>e.AnswerPoints).ToListAsync();
+            int totalGrade = 0;
+            foreach (var answerpoint in answerpoints) 
+            {
+                totalGrade += answerpoint;
+            }
+
+            submission.Grade = totalGrade;
             _context.Submissions.Update(submission);
             await _context.SaveChangesAsync();
 
