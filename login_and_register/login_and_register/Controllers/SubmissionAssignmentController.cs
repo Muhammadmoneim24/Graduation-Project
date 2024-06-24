@@ -60,10 +60,12 @@ namespace login_and_register.Controllers
         [HttpPut("AdddAssignmentGrade")]
         public async Task<IActionResult> AdddAssignmentGrade([FromForm] StudentAssModel submission)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(e => e.Email == submission.UserEmail);
-            var assign = await _context.SubmissionAssignments.FirstOrDefaultAsync(sa => sa.AssignmentId == submission.AssignmentId && sa.ApplicationUserId == user.Id);
+            var user = await _context.Users.FindAsync(submission.UserId);
             if (user == null)
                 return NotFound("User is not found");
+            
+            var assign = await _context.SubmissionAssignments.Where(sa => sa.AssignmentId == submission.AssignmentId && sa.ApplicationUserId == user.Id).FirstOrDefaultAsync();
+           
 
             if (submission == null || !ModelState.IsValid)
                 return NotFound("Model is not found");
@@ -92,12 +94,23 @@ namespace login_and_register.Controllers
         [HttpGet("GetAssignmentSubmissions{Assignmentid}")]
         public async Task<IActionResult> GetAssignmentSubmissions(int Assignmentid)
         {
-            var SubmissionA = await _context.SubmissionAssignments.Where(e => e.AssignmentId == Assignmentid).ToListAsync();
+            var SubmissionA = await _context.SubmissionAssignments.Include(e=>e.ApplicationUser).Where(e => e.AssignmentId == Assignmentid).ToListAsync();
 
-            if (SubmissionA == null || !SubmissionA.Any())
+            if (SubmissionA == null )
                 return NotFound("Submission is not found");
 
             return Ok(SubmissionA);
+        }
+
+        [HttpGet("GetAllSubmissions")]
+        public async Task<IActionResult> GetAllSubmissions()
+        {
+            var Submissions = await _context.SubmissionAssignments.ToListAsync();
+
+            if (Submissions == null)
+                return NotFound("Submission is not found");
+
+            return Ok(Submissions);
         }
     }
 }

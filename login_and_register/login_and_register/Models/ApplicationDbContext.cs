@@ -30,6 +30,10 @@ namespace login_and_register.Models
         public DbSet<ChatMessage> ChatMessages { get; set; }
         public DbSet<UserFriend> UserFriends { get; set; }
 
+        public DbSet<ChatGroup> ChatGroups { get; set; }
+
+        public DbSet<ChatGroupMember> ChatGroupMembers { get; set; }
+
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

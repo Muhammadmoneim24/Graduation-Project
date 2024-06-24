@@ -267,6 +267,57 @@ namespace login_and_register.Migrations
                     b.ToTable("Assignments", (string)null);
                 });
 
+            modelBuilder.Entity("login_and_register.Models.ChatGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("ChatGroups", (string)null);
+                });
+
+            modelBuilder.Entity("login_and_register.Models.ChatGroupMember", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ChatGroupMembers", (string)null);
+                });
+
             modelBuilder.Entity("login_and_register.Models.ChatMessage", b =>
                 {
                     b.Property<int>("Id")
@@ -277,6 +328,9 @@ namespace login_and_register.Migrations
 
                     b.Property<byte[]>("File")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -295,6 +349,8 @@ namespace login_and_register.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
 
                     b.HasIndex("ReceiverId");
 
@@ -776,8 +832,43 @@ namespace login_and_register.Migrations
                     b.Navigation("Course");
                 });
 
+            modelBuilder.Entity("login_and_register.Models.ChatGroup", b =>
+                {
+                    b.HasOne("login_and_register.Models.ApplicationUser", "Owner")
+                        .WithMany("OwnedGroups")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("login_and_register.Models.ChatGroupMember", b =>
+                {
+                    b.HasOne("login_and_register.Models.ChatGroup", "Group")
+                        .WithMany("Members")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("login_and_register.Models.ApplicationUser", "User")
+                        .WithMany("GroupMembers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("login_and_register.Models.ChatMessage", b =>
                 {
+                    b.HasOne("login_and_register.Models.ChatGroup", "Group")
+                        .WithMany("Messages")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("login_and_register.Models.ApplicationUser", "Receiver")
                         .WithMany("ReceivedMessages")
                         .HasForeignKey("ReceiverId")
@@ -789,6 +880,8 @@ namespace login_and_register.Migrations
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Group");
 
                     b.Navigation("Receiver");
 
@@ -1003,6 +1096,10 @@ namespace login_and_register.Migrations
 
                     b.Navigation("Friends");
 
+                    b.Navigation("GroupMembers");
+
+                    b.Navigation("OwnedGroups");
+
                     b.Navigation("ReceivedMessages");
 
                     b.Navigation("SentMessages");
@@ -1019,6 +1116,13 @@ namespace login_and_register.Migrations
             modelBuilder.Entity("login_and_register.Models.Assignment", b =>
                 {
                     b.Navigation("SubmissionAssignments");
+                });
+
+            modelBuilder.Entity("login_and_register.Models.ChatGroup", b =>
+                {
+                    b.Navigation("Members");
+
+                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("login_and_register.Models.Course", b =>

@@ -38,61 +38,76 @@ namespace login_and_register.Controllers
         }
 
         [HttpGet("GetStudentExam/{examid}/{studentid}")]
-        public async Task<IActionResult> GetStudentExam(int examid,string studentid )
+        public async Task<IActionResult> GetStudentExam(int examid, string studentid)
         {
-            var exam = await _context.Exams.FindAsync( examid);
+            var exam = await _context.Exams.FindAsync(examid);
             var student = await _context.Users.FindAsync(studentid);
             var sub = await _context.Submissions.FirstOrDefaultAsync(e => e.ExamId == examid && e.ApplicationUserId == studentid);
 
-
-            var separator = new char[] { '/',',' };
-            var Questions = await _context.Questions
-               .Where(e => e.ExamId == examid)
-               .Select(e => new {
-                   e.Id,
-                   e.ExamId,
-                   e.Type,
-                   e.Text,
-                   Options = e.Options.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList(),
-                   CorrectAnswer = e.CorrectAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList(),
-                   e.Points,
-                   e.Explanation
-               })
-               .ToListAsync();
-
-            if (exam is null || student is null)
+            if (exam == null || student == null)
                 return NotFound("Exam or student is not found");
 
-            var questionIds = Questions.Select(q => q.Id).ToList();
+            var separator = new char[] { '/', ',' };
+            var questions = await _context.Questions
+                .Where(e => e.ExamId == examid)
+                .Select(e => new {
+                    e.Id,
+                    e.ExamId,
+                    e.Type,
+                    e.Text,
+                    Options = e.Options.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList(),
+                    CorrectAnswer = e.CorrectAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList(),
+                    e.Points,
+                    e.Explanation
+                })
+                .ToListAsync();
+
+            var questionIds = questions.Select(q => q.Id).ToList();
 
             var studentAnswers = await _context.QuestionsSubs
                 .Where(s => s.SubmissionId == sub.Id && questionIds.Contains(s.QuestionId))
                 .ToListAsync();
 
+            var answerPoints = await _context.QuestionsSubs
+                .Where(qs => questionIds.Contains(qs.QuestionId) && qs.SubmissionId == sub.Id)
+                .GroupBy(qs => qs.QuestionId)
+                .Select(g => new { QuestionId = g.Key, AnswerPoints = g.First().AnswerPoints })
+                .ToDictionaryAsync(q => q.QuestionId, q => q.AnswerPoints);
+
             var examWithStudentAnswers = new
             {
-                exam =new { exam.Id,exam.CourseId,exam.Tittle,exam.Describtion,exam.Date,exam.Time,exam.Grades,exam.Instructions,exam.NumOfQuestions},
-                Questions = Questions.Select(q => new
+                exam = new { exam.Id, exam.CourseId, exam.Tittle, exam.Describtion, exam.Date, exam.Time, sub.Grade, exam.Instructions, exam.NumOfQuestions },
+                Questions = questions.Select(q => new
                 {
                     q.Id,
                     q.ExamId,
                     q.Type,
                     q.Text,
                     q.Options,
-                    CorrectAnswr = q.CorrectAnswer.OrderByDescending(o => int.Parse(o)).ToList(),
+                    CorrectAnswr = q.CorrectAnswer.OrderByDescending(o =>
+                    {
+                        int intValue;
+                        return int.TryParse(o, out intValue) ? intValue : int.MinValue;
+                    }).ToList(),
                     q.Points,
+                    answerpoints = answerPoints.ContainsKey(q.Id) ? answerPoints[q.Id] : 0,
                     q.Explanation,
                     StudentAnswer = studentAnswers
                         .Where(sa => sa.QuestionId == q.Id)
                         .SelectMany(e => e.StudentAnswer.Split(separator, StringSplitOptions.RemoveEmptyEntries))
-                        .OrderByDescending(o => int.Parse(o))
+                        .OrderByDescending(o =>
+                        {
+                            int intValue;
+                            return int.TryParse(o, out intValue) ? intValue : int.MinValue;
+                        })
                         .ToList()
                 }).ToList()
             };
 
             return Ok(examWithStudentAnswers);
-
         }
+
+
 
         [HttpGet("GetAssignmentGrades/{id}")]
         public async Task<IActionResult> GetAssignmentGrades(int id)
@@ -123,8 +138,14 @@ namespace login_and_register.Controllers
             if (assign is null || student is null)
                 return NotFound("Data is not found");
 
-            var studentAssignment = await _context.SubmissionAssignments.Where(e => e.ApplicationUserId == student.Id).FirstOrDefaultAsync(e => e.AssignmentId == assign.Id);
-            var data = new { student, studentAssignment };
+            var studentAssignment = await _context.SubmissionAssignments.Where(e => e.ApplicationUserId == student.Id && e.AssignmentId == assign.Id).FirstOrDefaultAsync();
+            var data = new {
+                student.FirstName,
+                student.LastName,
+                student.Id,student.Email,
+                studentAssignment
+            
+            };
 
 
             return Ok(data);

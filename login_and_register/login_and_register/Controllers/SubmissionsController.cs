@@ -104,63 +104,62 @@ namespace login_and_register.Controllers
 
 
         [HttpPut("manual-correction")]
-        public async Task<IActionResult> ManualCorrection(List<ManualModel> corrections)
+        public async Task<IActionResult> ManualCorrection(ManualModel correction)
         {
-            if (corrections == null || !corrections.Any())
+            if (correction == null )
             {
                 return BadRequest("No corrections provided");
             }
 
             int totalGrade = 0;
             int? submissionId = null;
-
-            foreach (var correction in corrections)
-            {
-                var questionSubmission = await _context.QuestionsSubs.FirstOrDefaultAsync(qs => qs.Id == correction.QuestionsSubId);
+            
+                var questionSubmission = await _context.QuestionsSubs.Where(e=>e.QuestionId == correction.QuestionId).FirstOrDefaultAsync();
 
                 if (questionSubmission == null)
                 {
-                    return NotFound($"Question submission with ID {correction.QuestionsSubId} not found");
+                    return NotFound($"Question submission with is not found");
                 }
 
                 questionSubmission.AnswerPoints = correction.AnswerPoints;
                 totalGrade += correction.AnswerPoints;
 
                 _context.QuestionsSubs.Update(questionSubmission);
+                await _context.SaveChangesAsync();
+
+            submissionId = questionSubmission.SubmissionId;
+
+            
 
 
-                submissionId = questionSubmission.SubmissionId;
-
-            }
-
-
-            var submission = await _context.Submissions.FirstOrDefaultAsync(s => s.Id == submissionId.Value);
+            var submission = await _context.Submissions
+                .Where(e=>e.ExamId==correction.ExamId && e.ApplicationUserId == correction.StudentId).FirstOrDefaultAsync();
 
             if (submission == null)
             {
                 return NotFound("Submission not found");
             }
 
-            submission.Grade = totalGrade;
+            submission.Grade += totalGrade;
             _context.Submissions.Update(submission);
             await _context.SaveChangesAsync();
 
-            return Ok(new { Grade = totalGrade });
+            return Ok( "totalgrade is  "+ submission.Grade );
 
 
 
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSubmission(int id)
+        [HttpGet("{examid}")]
+        public async Task<IActionResult> GetSubmission(int examid)
         {
-            var submission = await _context.Submissions.Where(e => e.ExamId == id).FirstOrDefaultAsync();
-            var quest = await _context.QuestionsSubs.Where(w => w.SubmissionId == submission.Id).Select(e => new { e.QuestionId, e.StudentAnswer }).ToListAsync();
+            var submission = await _context.Submissions.Include(e=>e.QuestionsSubs ).Where(e => e.ExamId == examid).ToListAsync();
+            
 
             if (submission == null)
                 return NotFound("Exam is not found");
 
-            return Ok(new { submission, quest });
+            return Ok(new { submission });
         }
     }
 }

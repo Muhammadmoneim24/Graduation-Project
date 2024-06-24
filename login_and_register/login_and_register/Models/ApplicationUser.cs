@@ -29,7 +29,8 @@ namespace login_and_register.Models
         public virtual ICollection<ChatMessage> ReceivedMessages { get; set; }
         public virtual ICollection<UserFriend> Friends { get; set; }
         public virtual ICollection<UserFriend> FriendOf { get; set; }
-
+        public virtual ICollection<ChatGroup> OwnedGroups { get; set; }
+        public virtual ICollection<ChatGroupMember> GroupMembers { get; set; }
 
     }
 }

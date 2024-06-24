@@ -6,7 +6,7 @@ namespace login_and_register.Dtos
     {
         public int AssignmentId { get; set; }
 
-        public string UserEmail { get; set; }
+        public string UserId { get; set; }
 
         public int Grade { get; set; }
 

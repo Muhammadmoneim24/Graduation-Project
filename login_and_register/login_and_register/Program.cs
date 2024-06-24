@@ -12,6 +12,7 @@ using System.Text;
 using login_and_register.Sevices;
 using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.OpenApi.Any;
 
 namespace login_and_register
 {
@@ -23,6 +24,17 @@ namespace login_and_register
 
             // Add services to the container.
             builder.Services.AddCors();
+            builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
+                builder =>
+                {
+                    builder.AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .SetIsOriginAllowed((AnyType) => true)
+                           .AllowCredentials();
+                }
+
+                ));
+
             builder.Services.AddControllers();
 
             builder.Services.AddEndpointsApiExplorer();
@@ -84,6 +96,15 @@ namespace login_and_register
 
             var app = builder.Build();
 
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            var logger = app.Services.GetRequiredService<ILogger<Program>>();
+            logger.LogInformation("Starting application...");
+
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -91,7 +112,11 @@ namespace login_and_register
             });
 
             app.UseHttpsRedirection();
-            app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
+            app.UseCors("CorsPolicy");
+            //app.UseCors(e=>e.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            
+           
 
             app.UseRouting();
 

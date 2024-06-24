@@ -2,7 +2,7 @@
 {
     public class MeassageModel
     {
-        public string receiverUserName { get; set; }
+        public string receiverUserId { get; set; }
         public string message { get; set; }
         public IFormFile? file { get; set; }
             
