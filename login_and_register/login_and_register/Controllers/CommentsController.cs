@@ -55,6 +55,7 @@ namespace login_and_register.Controllers
 
             comm.Content = comment.Content;
 
+            _context.Comments.Update(comm);
             await _context.SaveChangesAsync();
 
             return Ok(comm);

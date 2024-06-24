@@ -166,7 +166,8 @@ namespace login_and_register.Controllers
             exam.Instructions = model.Instructions;
             exam.Grades = model.Grades;
 
-            _context.SaveChanges();
+            _context.Exams.Update(exam);
+            await _context.SaveChangesAsync();
 
             return Ok(exam);
 

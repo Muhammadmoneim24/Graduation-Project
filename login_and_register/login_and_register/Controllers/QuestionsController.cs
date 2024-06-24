@@ -106,7 +106,8 @@ namespace login_and_register.Controllers
             question.CorrectAnswer = quest.correctAnswer;
             question.Explanation = quest.explanaition;
 
-            _context.SaveChanges();
+            _context.Questions.Update(question);
+            await _context.SaveChangesAsync();
 
             return Ok(question);
 

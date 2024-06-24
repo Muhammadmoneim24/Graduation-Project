@@ -96,7 +96,7 @@ namespace login_and_register.Controllers
         [HttpDelete("RemoveFriend{friendid}")]
         public async Task<IActionResult> RemoveFriend(string friendid)
         {
-            var friend = await _context.UserFriends.FindAsync(friendid);
+            var friend = await _context.UserFriends.Where(e=>e.FriendId == friendid).FirstOrDefaultAsync();
             if (friend == null) return Conflict("friend is not found");
 
             _context.UserFriends.Remove(friend);

@@ -116,7 +116,8 @@ namespace login_and_register.Controllers
             assign.Describtion = assignment.Description;
             assign.EndDate = assignment.EndDate;
 
-            _context.SaveChanges();
+            _context.Assignments.Update(assign);
+            await _context.SaveChangesAsync();
 
             return Ok(assign);
         }

@@ -108,8 +108,8 @@ namespace login_and_register.Controllers
             disc.Tittle = discussion.Tittle;
             disc.Content = discussion.Content;
 
-
-            _context.SaveChanges();
+              _context.Discussions.Update(disc);
+            await _context.SaveChangesAsync();
 
             return Ok(disc);
         }

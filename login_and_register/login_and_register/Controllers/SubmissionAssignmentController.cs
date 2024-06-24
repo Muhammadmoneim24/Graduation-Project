@@ -60,22 +60,22 @@ namespace login_and_register.Controllers
         [HttpPut("AdddAssignmentGrade")]
         public async Task<IActionResult> AdddAssignmentGrade([FromForm] StudentAssModel submission)
         {
+            if (submission == null || !ModelState.IsValid)
+                return NotFound("Model is not found");
+            
             var user = await _context.Users.FindAsync(submission.UserId);
             if (user == null)
                 return NotFound("User is not found");
             
             var assign = await _context.SubmissionAssignments.Where(sa => sa.AssignmentId == submission.AssignmentId && sa.ApplicationUserId == user.Id).FirstOrDefaultAsync();
-           
-
-            if (submission == null || !ModelState.IsValid)
-                return NotFound("Model is not found");
 
             if (assign == null)
                 return NotFound("Assignment submission is not found");
 
             assign.Grade = submission.Grade;
 
-            _context.SaveChanges();
+            _context.SubmissionAssignments.Update(assign);
+            await _context.SaveChangesAsync();
 
             return Ok(assign);
         }

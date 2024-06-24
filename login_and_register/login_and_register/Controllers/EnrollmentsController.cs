@@ -68,7 +68,8 @@ namespace login_and_register.Controllers
             enroll.ApplicationUserId = std.Id;
             enroll.CourseId = course.Id;
 
-            _context.SaveChanges();
+            _context.UserCourses.Update(enroll);
+            await _context.SaveChangesAsync();
 
             return Ok(enroll);
 

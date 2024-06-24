@@ -113,7 +113,8 @@ namespace login_and_register.Controllers
                 coursetoupdate.File = dataStraem.ToArray();
             }
 
-            _context.SaveChanges();
+            _context.Courses.Update(coursetoupdate);
+            await _context.SaveChangesAsync();
 
             return Ok(coursetoupdate);
         }

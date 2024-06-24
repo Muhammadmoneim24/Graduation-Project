@@ -135,7 +135,8 @@ namespace login_and_register.Controllers
             lec.Description = lecture.Description;
             lec.Link = lecture.Link;
 
-            _context.SaveChanges();
+            _context.Lectures.Update(lec);
+            await _context.SaveChangesAsync();
 
             return Ok(lec);
         }
