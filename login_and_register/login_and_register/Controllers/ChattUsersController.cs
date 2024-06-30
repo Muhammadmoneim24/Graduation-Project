@@ -3,6 +3,8 @@ using login_and_register.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Plugins;
+using System.Drawing.Imaging;
 using System.Security.Claims;
 
 namespace login_and_register.Controllers
@@ -40,6 +42,128 @@ namespace login_and_register.Controllers
 
         }
 
+
+        [HttpPost("SendMessageFile")]
+        public async Task<IActionResult> SendMessageFile([FromForm] MessageFile messfile)
+        {
+            var user = await _context.Users.FindAsync(messfile.SenderId);
+            if (user == null) return Conflict("User is not found");
+
+            var friend = await _context.Users.FindAsync(messfile.ReceiverId);
+            if (friend == null) return Conflict("Friend is not found");
+
+            using var datastream = new MemoryStream();
+            if (messfile.File != null)
+            {
+                await messfile.File.CopyToAsync(datastream);
+            }
+
+            var file = new ChatMessage
+            {
+                SenderId = messfile.SenderId,
+                ReceiverId = messfile.ReceiverId,
+                File = messfile.File is null ? null : datastream.ToArray()
+            };
+
+            await _context.ChatMessages.AddAsync(file);
+            await _context.SaveChangesAsync();
+
+            return Ok(file);
+
+
+        }
+
+        [HttpPost("SendGroupFile")]
+        public async Task<IActionResult> SendGroupFile([FromForm] GroupFileModel gropfile)
+        {
+            var user = await _context.Users.FindAsync(gropfile.SenderId);
+            if (user == null) return Conflict("User is not found");
+
+            var group = await _context.ChatGroups.FindAsync(gropfile.GruopId);
+            if (group == null) return Conflict("group is not found");
+
+            using var datastream = new MemoryStream();
+            if (gropfile.File != null)
+            {
+                await gropfile.File.CopyToAsync(datastream);
+            }
+
+            var file = new ChatMessage
+            {
+                SenderId = gropfile.SenderId,
+                GroupId = gropfile.GruopId,
+                File = gropfile.File is null ? null : datastream.ToArray()
+            };
+
+            await _context.ChatMessages.AddAsync(file);
+            await _context.SaveChangesAsync();
+
+            return Ok(file);
+
+
+        }
+
+        [HttpGet("GetUserGroups{userid}")]
+        public async Task<IActionResult> GetUserGroups(string userid)
+        {
+            var groups = await _context.ChatGroupMembers
+                .Where(m => m.UserId == userid)
+                .Include(m => m.Group)
+                .Include(m => m.Group)
+                    .ThenInclude(g => g.Messages)
+                        .ThenInclude(m => m.Sender)
+                .Select(m => m.Group)
+                .ToListAsync();
+
+            if (groups == null || !groups.Any())
+            {
+                return NotFound("No groups");
+            }
+
+            var result = groups.Select(g => new
+            {
+                g.Id,
+                g.Name,
+                g.OwnerId,
+                
+                Messages = g.Messages.Select(m => new
+                {
+                    m.Id,
+                    m.SenderId,
+                    SenderUserName = m.Sender.UserName,
+                    m.Message,
+                    m.File,
+                    m.Timestamp
+                }).ToList()
+            }).ToList();
+
+            return Ok(result);
+        }
+
+
+
+        [HttpGet("GetGroupMembers{groupid}")]
+        public async Task<IActionResult> GetGroupMembers(int groupid)
+        {
+            var groupmessages = await _context.ChatGroups.Where(e => e.Id == groupid).Select(e=>e.Messages).ToListAsync();
+            var groupmembers = await _context.ChatGroupMembers.Include(e=>e.User).Where(e => e.GroupId == groupid).ToListAsync();
+
+            if (groupmembers is null)
+                return NotFound("No groups");
+
+
+            return Ok(new { groupmembers , groupmessages });
+        }
+
+        [HttpGet("GetMessageFile{id}")]
+        public async Task<IActionResult> GetMessageFile(int id )
+        {
+           
+            var file = await _context.ChatMessages.FindAsync(id);
+            return Ok(file.File);
+        }
+
+
         [HttpGet("GetUserFriends{UserId}")]
         public async Task<IActionResult> GetUserFriends(string UserId)
         {
@@ -75,7 +199,7 @@ namespace login_and_register.Controllers
             return Ok(user);
         }
 
-        [HttpGet("GetChatMessages{senderid,receiverid}")]
+        [HttpGet("GetChatMessages")]
         public async Task<IActionResult> GetChatMessages(string senderid,string receiverid)
         {
             var user =  await _context.UserFriends.Where(e=>e.UserId == senderid && e.FriendId == receiverid).FirstOrDefaultAsync();
@@ -84,13 +208,26 @@ namespace login_and_register.Controllers
                 return Conflict("Friend is not found");
             }
 
-            var messages = await _context.ChatMessages
+            var messages = await _context.ChatMessages.Include(e=>e.Sender)
                 .Where(cm => (cm.SenderId == senderid && cm.ReceiverId == receiverid) ||
                              (cm.SenderId == receiverid && cm.ReceiverId == senderid))
                 .OrderBy(cm => cm.Timestamp)
                 .ToListAsync();
 
             return Ok(messages);
+        }
+
+        [HttpGet("GetGroupFile{groupId}")]
+        public async Task<IActionResult> GetGroupFile(int groupId)
+        {
+            var group = await _context.ChatGroups.FindAsync(groupId);
+            if (group is null)
+            {
+                return Conflict("group is not found");
+            }
+
+            var groupmessages = await _context.ChatMessages.Where(e => e.GroupId == groupId).Select(e=>e.File).FirstOrDefaultAsync();
+            return Ok(groupmessages);
         }
 
         [HttpDelete("RemoveFriend{friendid}")]

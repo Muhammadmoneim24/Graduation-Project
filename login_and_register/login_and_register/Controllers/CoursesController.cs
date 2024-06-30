@@ -122,8 +122,6 @@ namespace login_and_register.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
-            if (!await _context.Courses.AllAsync(c => c.Id == id))
-                return BadRequest("Id is not valid");
 
             var courseyodelete = await _context.Courses.FindAsync(id);
 
@@ -131,7 +129,7 @@ namespace login_and_register.Controllers
                 return NotFound("Corse is npt found");
 
             _context.Courses.Remove(courseyodelete);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok(courseyodelete);
         }

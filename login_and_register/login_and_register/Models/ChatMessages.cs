@@ -8,11 +8,12 @@ namespace login_and_register.Models
     {
         
         public int Id { get; set; }
-        public string SenderId { get; set; }
-        public string ReceiverId { get; set; }
+        public string? SenderId { get; set; }
+        public string? ReceiverId { get; set; }
         public int? GroupId { get; set; }
-        public string Message { get; set; }
+        public string? Message { get; set; }
         public byte[]? File { get; set; }
+
         public DateTime Timestamp { get; set; }
 
         public ChatGroup? Group { get; set; }

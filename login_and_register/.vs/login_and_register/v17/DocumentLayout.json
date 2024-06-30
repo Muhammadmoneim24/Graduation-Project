@@ -3,28 +3,24 @@
   "WorkspaceRootPath": "E:\\4th CSE\\Grad project\\login_and_register\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\controllers\\chattuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\chattuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\hub\\chatmessagehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\hub\\chatmessagehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\controllers\\chattuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\chattuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\dtos\\groupfilemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\dtos\\groupfilemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|e:\\4th cse\\grad project\\login_and_register\\login_and_register\\controllers\\gradescentercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\gradescentercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\configurations\\chatmessageconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\configurations\\chatmessageconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\dtos\\manualmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\dtos\\manualmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\helpers\\connectioninfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFBB8E0-C809-43FD-9A7E-7C0614D68767}|login_and_register\\login_and_register.csproj|solutionrelative:login_and_register\\helpers\\connectioninfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,77 +35,65 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "GradesCenterController.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\GradesCenterController.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Controllers\\GradesCenterController.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\GradesCenterController.cs",
-              "RelativeToolTip": "login_and_register\\Controllers\\GradesCenterController.cs",
-              "ViewState": "AQIAAHwAAAAAAAAAAAAkwAAAAAAAAAAA",
+              "Title": "GroupFileModel.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\GroupFileModel.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Dtos\\GroupFileModel.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\GroupFileModel.cs",
+              "RelativeToolTip": "login_and_register\\Dtos\\GroupFileModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T02:12:05.126Z",
+              "WhenOpened": "2024-06-30T15:46:26.186Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
+              "Title": "ChatMessageConfigurations.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Configurations\\ChatMessageConfigurations.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Configurations\\ChatMessageConfigurations.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Configurations\\ChatMessageConfigurations.cs",
+              "RelativeToolTip": "login_and_register\\Configurations\\ChatMessageConfigurations.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-30T10:03:45.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ConnectionInfo.cs",
+              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Helpers\\ConnectionInfo.cs",
+              "RelativeDocumentMoniker": "login_and_register\\Helpers\\ConnectionInfo.cs",
+              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Helpers\\ConnectionInfo.cs",
+              "RelativeToolTip": "login_and_register\\Helpers\\ConnectionInfo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T22:39:49.488Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "ChattUsersController.cs",
               "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\ChattUsersController.cs",
               "RelativeDocumentMoniker": "login_and_register\\Controllers\\ChattUsersController.cs",
               "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\ChattUsersController.cs",
               "RelativeToolTip": "login_and_register\\Controllers\\ChattUsersController.cs",
-              "ViewState": "AQIAAFYAAAAAAAAAAAAUwGIAAABqAAAA",
+              "ViewState": "AQIAAGIAAAAAAAAAAAAkwGkAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-23T22:39:15.079Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "GroupController.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\GroupController.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Controllers\\GroupController.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Controllers\\GroupController.cs",
-              "RelativeToolTip": "login_and_register\\Controllers\\GroupController.cs",
-              "ViewState": "AQIAADAAAAAAAAAAAAAYwC8AAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-23T21:48:23.872Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ChatMessageHub.cs",
               "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Hub\\ChatMessageHub.cs",
               "RelativeDocumentMoniker": "login_and_register\\Hub\\ChatMessageHub.cs",
               "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Hub\\ChatMessageHub.cs",
               "RelativeToolTip": "login_and_register\\Hub\\ChatMessageHub.cs",
-              "ViewState": "AQIAAL8AAAAAAAAAAAAkwCEAAAAAAAAA",
+              "ViewState": "AQIAAIEAAAAAAAAAAAAmwJIAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-23T11:12:23.276Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Program.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Program.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Program.cs",
-              "RelativeToolTip": "login_and_register\\Program.cs",
-              "ViewState": "AQIAAHIAAAAAAAAAAAArwH8AAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-23T10:36:13.742Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ManualModel.cs",
-              "DocumentMoniker": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\ManualModel.cs",
-              "RelativeDocumentMoniker": "login_and_register\\Dtos\\ManualModel.cs",
-              "ToolTip": "E:\\4th CSE\\Grad project\\login_and_register\\login_and_register\\Dtos\\ManualModel.cs",
-              "RelativeToolTip": "login_and_register\\Dtos\\ManualModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-23T09:25:48.17Z"
             }
           ]
         }
