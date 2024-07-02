@@ -66,7 +66,7 @@ namespace login_and_register.Controllers
         //    return Ok(model);
         //}
 
-        [HttpPost("auto-login")]
+        [HttpPost("AutoLogin")]
         public async Task<IActionResult> AutoLogin()
         {
             var authHeader = Request.Headers["Authorization"].FirstOrDefault();
@@ -74,25 +74,31 @@ namespace login_and_register.Controllers
             {
                 var token = authHeader.Substring("Bearer ".Length);
                 var handler = new JwtSecurityTokenHandler();
-                var jwtSecurityToken = handler.ReadJwtToken(token);
-
-                if (jwtSecurityToken != null)
+                try
                 {
-                    var emailClaim = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Email);
-                    if (emailClaim != null)
+                    var jwtSecurityToken = handler.ReadJwtToken(token);
+
+                    if (jwtSecurityToken != null)
                     {
-                        var user = await _context.Users.Include(e => e.UserCourses).FirstOrDefaultAsync(u => u.Email == emailClaim.Value);
-                        if (user != null)
+                        var emailClaim = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Email);
+                        if (emailClaim != null)
                         {
-                            
-                            var userdata = new { user.Email, user.UserName, user.UserCourses };
-                            return Ok(userdata);
+                            var userdata = await _context.Users.Include(e => e.UserCourses).Where(u => u.Email == emailClaim.Value).ToListAsync();
+                            if (userdata != null)
+                            {
+                                return Ok(new { success = true,  userdata });
+                            }
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    // Log exception
+                    return BadRequest(new { success = false, error = ex.Message });
+                }
             }
 
-            return Unauthorized();
+            return Unauthorized(new { success = false, error = "Invalid token" });
         }
 
     }

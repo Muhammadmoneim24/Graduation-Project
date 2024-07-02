@@ -1,5 +1,6 @@
 ﻿using login_and_register.Dtos;
 using login_and_register.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using System.Security.Claims;
 namespace login_and_register.Controllers
 {
     [Route("api/[controller]")]
+   
     [ApiController]
     public class ChattUsersController : ControllerBase
     {
@@ -243,5 +245,6 @@ namespace login_and_register.Controllers
 
 
         }
+
     }
 }

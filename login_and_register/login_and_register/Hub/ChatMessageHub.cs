@@ -10,6 +10,8 @@ using NuGet.Protocol.Plugins;
 using login_and_register.Helpers;
 using System.Reflection;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Text.RegularExpressions;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 public class ChatHub : Hub
 {
@@ -81,30 +83,12 @@ public class ChatHub : Hub
     }
 
 
-    public async Task SendMessage(string ReceiverUserName, string? message, int? fileid = null)
+    public async Task SendMessage(string ReceiverUserName, string? message = null, int? fileid = null)
     {
-
-
         var senderConnectionId = Context.ConnectionId;
-
         var senderUserName = GetUserNameByConnectionId(senderConnectionId);
-
-        var user = GetConnectionIdByUserName(ReceiverUserName);
-
         var sender = await _userManager.FindByNameAsync(senderUserName);
         var receiver = await _userManager.FindByNameAsync(ReceiverUserName);
-        
-        
-        if (string.IsNullOrEmpty(user))
-            await Clients.Caller.SendAsync("ReceiveMessage", sender.UserName, message, fileid);
-        else
-        {
-            await Clients.Client(user).SendAsync("ReceiveMessage", sender.UserName, message, fileid);
-            await Clients.Caller.SendAsync("ReceiveMessage", sender.UserName, message, fileid);
-        }
-
-
-        
 
         if (fileid == null && string.IsNullOrEmpty(message))
         {
@@ -112,24 +96,38 @@ public class ChatHub : Hub
             return;
         }
 
+        // Determine if message was provided, otherwise use existing message from fileid
+        string messageToSend = message ?? "";
+
+        var user = GetConnectionIdByUserName(ReceiverUserName);
+
+        if (string.IsNullOrEmpty(user))
+        {
+            await Clients.Caller.SendAsync("ReceiveMessage", sender.UserName, messageToSend, fileid);
+        }
+        else
+        {
+            await Clients.Client(user).SendAsync("ReceiveMessage", sender.UserName, messageToSend, fileid);
+            await Clients.Caller.SendAsync("ReceiveMessage", sender.UserName, messageToSend, fileid);
+        }
+
         if (fileid == null)
         {
-
+            // Create new message
             var mess = new ChatMessage
             {
                 SenderId = sender.Id,
                 ReceiverId = receiver.Id,
-                Message = message,
+                Message = messageToSend,
                 File = null,
                 Timestamp = DateTime.UtcNow
             };
 
             await _context.ChatMessages.AddAsync(mess);
-
         }
-
-        else if (fileid != null)
+        else
         {
+            // Update existing message
             var mess = await _context.ChatMessages.FindAsync(fileid);
             if (mess == null)
             {
@@ -137,14 +135,14 @@ public class ChatHub : Hub
                 return;
             }
 
-            mess.Message = message ?? mess.Message;
+            mess.Message = messageToSend;
             mess.Timestamp = DateTime.UtcNow;
             _context.ChatMessages.Update(mess);
         }
 
         await _context.SaveChangesAsync();
-
     }
+
 
 
 
@@ -212,10 +210,10 @@ public class ChatHub : Hub
 
                 group.Members.Add(new ChatGroupMember { UserId = user.Id, IsAdmin = member.IsAdmin });
                 var connectionId = GetConnectionIdByUserName(user.UserName);
-                await Clients.Caller.SendAsync("MemberAdded", member.GroupID, user.UserName);
+                await Clients.Caller.SendAsync("MemberAdded", member.GroupID, group.Name,user.FirstName,user.LastName, user.UserName, member.IsAdmin);
                 if (connectionId != null)
                 {
-                    await Clients.Client(connectionId).SendAsync("AddedToGroup", member.GroupID, group.Name);
+                    await Clients.Client(connectionId).SendAsync("AddedToGroup", member.GroupID, group.Name, user.FirstName, user.LastName, user.UserName, member.IsAdmin);
                 }
             }
             await _context.SaveChangesAsync();
@@ -225,8 +223,6 @@ public class ChatHub : Hub
 
             await Clients.Caller.SendAsync("ReceiveGroupMessage", "System", $"Error in SendGroupMessage: {ex.Message}");
         }
-
-
 
 
     }
@@ -339,6 +335,64 @@ public class ChatHub : Hub
             
             await Clients.Caller.SendAsync("ReceiveGroupMessage", "System", $"Error in SendGroupMessage: {ex.Message}");
         }
+    }
+
+    public async Task DeleteGroup(int groupid) 
+    {
+        try
+        {
+
+            var group = await _context.ChatGroups
+                    .Include(g => g.Members).ThenInclude(m => m.User).FirstOrDefaultAsync(g => g.Id == groupid);
+
+            var userConnectionId = Context.ConnectionId;
+            var userUserName = GetUserNameByConnectionId(userConnectionId);
+            var user = await _userManager.FindByNameAsync(userUserName);
+
+            if (group != null)
+            {
+                var groupmember = await _context.ChatGroupMembers.FirstOrDefaultAsync(e => e.UserId == user.Id);
+
+                if (!groupmember.IsAdmin) { await Clients.Client(userConnectionId).SendAsync("DeleteGroup", "You can't Delete"); }
+
+                else
+                {
+                    foreach (var member in group.Members)
+                    {
+                        group.Members.Remove(member);
+                        var connectionId = GetConnectionIdByUserName(member.User.UserName);
+                        if (!string.IsNullOrEmpty(connectionId))
+                        {
+                            await Clients.Client(connectionId).SendAsync("DeleteGroup", "MemberRemoved");
+                        }
+                    }
+
+                    var groupcaht = await _context.ChatMessages.Where(e => e.GroupId == groupid).ToListAsync();
+                    foreach (var item in groupcaht)
+                    {
+                        _context.ChatMessages.Remove(item);
+                    }
+
+                    _context.ChatGroups.Remove(group);
+
+
+
+                    await _context.SaveChangesAsync();
+                }
+            }
+            else
+            {
+                await Clients.Caller.SendAsync("DeleteGroup", "System", "Group or sender not found.");
+            }
+        }
+
+        catch (Exception ex)
+        {
+
+            await Clients.Caller.SendAsync("ReceiveGroupMessage", "System", $"Error in SendGroupMessage: {ex.Message}");
+        }
+
+
     }
 
 }

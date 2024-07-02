@@ -9,6 +9,7 @@ using login_and_register.Models;
 namespace login_and_register.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Roles ="Instructor")]
     [ApiController]
     public class ChatController : ControllerBase
     {
@@ -20,7 +21,7 @@ namespace login_and_register.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        
         public async Task<IActionResult> GetChats()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -50,7 +51,7 @@ namespace login_and_register.Controllers
         }
 
         [HttpGet("messages/{otheruserId}")]
-        [Authorize]
+      
         public async Task<IActionResult> GetMessages(string otheruserId)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -69,7 +70,7 @@ namespace login_and_register.Controllers
         }
 
         [HttpGet("search")]
-        [Authorize]
+        
         public async Task<IActionResult> SearchUsersByName(string name)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
