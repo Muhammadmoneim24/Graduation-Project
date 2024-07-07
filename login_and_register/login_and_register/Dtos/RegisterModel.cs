@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace login_and_register.Dtos
 {
@@ -12,10 +13,10 @@ namespace login_and_register.Dtos
         [Required, StringLength(50)]
         public string UserName { get; set; }
 
-        [Required, StringLength(128)]
+        [Required, EmailAddress ,StringLength(128)]
         public string Email { get; set; }
 
-        [Required, StringLength(256)]
+        [Required, PasswordPropertyText,StringLength(256, MinimumLength = 6)]
         public string Password { get; set; }
 
         [Required, StringLength(50)]

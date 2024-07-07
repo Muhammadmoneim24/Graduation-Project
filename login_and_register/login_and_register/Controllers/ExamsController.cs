@@ -1,9 +1,11 @@
 ﻿using login_and_register.Dtos;
 using login_and_register.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Security.Claims;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
@@ -135,20 +137,37 @@ namespace login_and_register.Controllers
             return Ok(questions);
         }
 
-        [HttpGet("{id}")]
+         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetCourseExams(int id)
         {
             if (!await _context.Courses.AnyAsync(c => c.Id == id))
                 return BadRequest("Id is not valid");
 
-            var exams = await _context.Exams.Include(e=>e.Questions).Where(e => e.CourseId == id).ToListAsync();
-
+            var exams = await _context.Exams.Include(e => e.Questions).Where(e => e.CourseId == id).ToListAsync();
 
             if (exams == null)
-                return NotFound("The coure has no exams");
+                return NotFound("The course has no exams");
 
-            return Ok(exams);
+            
+            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            if (userRole == "Instructor")
+            {
+                return Ok(exams);
+            }
+            else if (userRole == "Student")
+            {
+                var today = DateTime.Today;
+                var relevantExams = exams.Where(e => DateTime.TryParse(e.Date, out var examDate) && examDate.Date <= today)
+                                          .ToList();
+                return Ok(relevantExams);
+            }
+
+            return Forbid(); // If the role is not recognized, forbid access
         }
+    
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateExam(int id, [FromBody] ExamModel model)

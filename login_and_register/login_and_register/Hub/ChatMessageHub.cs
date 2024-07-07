@@ -56,21 +56,6 @@ public class ChatHub : Hub
         return null;
     }
 
-    //public List<string> GetConnectionIdsByGroupName(string groupName)
-    //{
-    //    var connectionIds = new List<string>();
-
-    //    foreach (var user in connectedUsers)
-    //    {
-    //        if (user.Value.GroupName == groupName)
-    //        {
-    //            connectionIds.Add(user.Key);
-    //        }
-    //    }
-
-    //    return connectionIds;
-    //}
-
 
     public override Task OnDisconnectedAsync(Exception? exception)
     {

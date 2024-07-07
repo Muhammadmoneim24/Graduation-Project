@@ -52,6 +52,7 @@ namespace login_and_register.Controllers
             return Ok(newcourse);
         }
 
+      
 
 
         [HttpGet("GetUserCourses")]
@@ -81,11 +82,39 @@ namespace login_and_register.Controllers
             var course = await _context.Courses.FindAsync(id);
 
             if (course == null)
-                return NotFound("Lec is not found");
+                return NotFound("Course is not found");
 
             return Ok(course);
         }
 
+        [HttpGet("GetCoursePlaylist{courseId}")]
+        public async Task<IActionResult> GetCoursePlaylist(int courseId)
+        {
+            var course = await _context.Courses.FindAsync(courseId);
+
+            if (course == null)
+                return NotFound("Corse is not found");
+
+            return Ok(course.Playlist);
+        }
+
+
+        [HttpPut("AddPlayList")]
+        public async Task<IActionResult> AddPlayList([FromBody] CoursePlaylistModel playlist) 
+        {
+            var course = await _context.Courses.FindAsync(playlist.CourseId);
+
+            if (course == null) { return BadRequest("Corse is not found"); }
+
+            course.Playlist = playlist.Playlist;
+
+            _context.Courses.Update(course);
+            await _context.SaveChangesAsync();
+
+
+            return Ok(course);
+        
+        }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCourse(int id, [FromForm] CourseModel course)

@@ -12,6 +12,8 @@ namespace login_and_register.Models
         public int Id { get; set; }
         public string CourseName { get; set; }
         public string Description { get; set; }
+        public string? Playlist { get; set; }
+
         public byte []? File { get; set; }
 
         public ICollection<Discussion> Discussions { get; set; }

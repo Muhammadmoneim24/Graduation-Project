@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -27,6 +28,18 @@ namespace login_and_register.Sevices
 
         public async Task<AuthModel> RegisterAsync(RegisterModel model)
         {
+            if (model == null)
+                return new AuthModel { Message = "Invalid client request!" };
+
+            if (string.IsNullOrWhiteSpace(model.Email) || !new EmailAddressAttribute().IsValid(model.Email))
+                return new AuthModel { Message = "Invalid email format!" };
+
+            if (string.IsNullOrWhiteSpace(model.UserName))
+                return new AuthModel { Message = "Username is required!" };
+
+            if (string.IsNullOrWhiteSpace(model.Password) || model.Password.Length < 6)
+                return new AuthModel { Message = "Password must be at least 6 characters long!" };
+
             if (await _userManager.FindByEmailAsync(model.Email) is not null)
                 return new AuthModel { Message = "Email is already registered!" };
 
@@ -70,6 +83,15 @@ namespace login_and_register.Sevices
 
         public async Task<AuthModel> LoginAsync(LoginModel model)
         {
+            if (model == null)
+                return new AuthModel { Message = "Invalid client request!" };
+
+            if (string.IsNullOrWhiteSpace(model.Email) || !new EmailAddressAttribute().IsValid(model.Email))
+                return new AuthModel { Message = "Invalid email format!" };
+
+            if (string.IsNullOrWhiteSpace(model.Password))
+                return new AuthModel { Message = "Password is required!" };
+
             var authModel = new AuthModel();
 
             var user = await _userManager.FindByEmailAsync(model.Email);

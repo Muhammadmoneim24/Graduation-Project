@@ -20,8 +20,8 @@ namespace login_and_register.Configurations
 
             builder.Property(c =>c.CourseName).HasColumnType("VARCHAR").HasMaxLength(500).IsRequired();
             builder.Property(c => c.Description).HasColumnType("VARCHAR").HasMaxLength(1000).IsRequired();
-         
-       
+            builder.Property(c => c.Playlist).HasColumnType("VARCHAR").HasMaxLength(1000).IsRequired(false);
+
 
 
             builder.ToTable("Courses");

@@ -90,6 +90,15 @@ namespace login_and_register.Controllers
             return Ok(question);
         }
 
+        [HttpGet("QuestionsBank{courseId}")]
+        public async Task<IActionResult> QuestionBank(int courseId)
+        {
+            var exam = await _context.Exams.Where(e => e.CourseId == courseId).Select(e=>e.Questions).ToListAsync();
+
+            return Ok(exam);
+        }
+
+
         [HttpPut("{id}")]
 
         public async Task<IActionResult> UpdateQuestion(int id, [FromBody] QuestionsModel quest)

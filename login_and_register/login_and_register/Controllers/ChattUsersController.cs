@@ -232,16 +232,22 @@ namespace login_and_register.Controllers
             return Ok(groupmessages);
         }
 
-        [HttpDelete("RemoveFriend{friendid}")]
-        public async Task<IActionResult> RemoveFriend(string friendid)
+        [HttpDelete("RemoveFriend")]
+        public async Task<IActionResult> RemoveFriend( string friendid, string userid)
         {
-            var friend = await _context.UserFriends.Where(e=>e.FriendId == friendid).FirstOrDefaultAsync();
+            var friend = await _context.UserFriends.Where(e=>e.FriendId == friendid && e.UserId == userid).FirstOrDefaultAsync();
             if (friend == null) return Conflict("friend is not found");
+
+            var deletedChats = await _context.ChatMessages
+                .Where(e => (e.ReceiverId == friendid && e.SenderId == userid) || (e.ReceiverId == userid && e.SenderId == friendid))
+                .ToListAsync();
+
+            _context.ChatMessages.RemoveRange(deletedChats);
 
             _context.UserFriends.Remove(friend);
             await _context.SaveChangesAsync();
 
-            return Ok(friend);
+            return Ok( friend );
 
 
         }

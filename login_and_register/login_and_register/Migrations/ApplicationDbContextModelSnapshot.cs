@@ -407,6 +407,10 @@ namespace login_and_register.Migrations
                     b.Property<byte[]>("File")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("Playlist")
+                        .HasMaxLength(1000)
+                        .HasColumnType("VARCHAR");
+
                     b.HasKey("Id");
 
                     b.ToTable("Courses", (string)null);
